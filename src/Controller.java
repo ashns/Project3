@@ -17,6 +17,8 @@ public class Controller {
     @FXML
     Label rateLabel = new Label();
     @FXML
+    Label payLabel = new Label();
+    @FXML
     TextField nameBox = new TextField();
     @FXML
     Button addBtn = new Button();
@@ -72,10 +74,12 @@ public class Controller {
     }
 
     public void rateChange(ActionEvent actionEvent) {
+        payLabel.setText("Hourly Wage: $");
         rateLabel.setText("/ hour");
     }
 
     public void salaryChange(ActionEvent actionEvent) {
+        payLabel.setText("Annual Salary: $");
         rateLabel.setText("/ year");
     }
 
