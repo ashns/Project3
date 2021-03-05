@@ -100,8 +100,13 @@ public class Controller {
     }
 
     public void add(ActionEvent actionEvent) {
-
-        Float rate = (float) Integer.parseInt(payBox.getText());
+        Float rate = null;
+        try{
+            rate = Float.parseFloat(payBox.getText());
+            payBox.setText("Is Float: " + rate);
+        }catch (NumberFormatException e){
+            payBox.setText("Not Float!");
+        }
         Profile hireProfile = getEnteredProfile();
 
         if (Position.getSelectedToggle().toString() == "PTRB") {
@@ -133,7 +138,13 @@ public class Controller {
     }
 
     public void remove(ActionEvent actionEvent) {
-        Float rate = (float) Integer.parseInt(payBox.getText());
+        Float rate = null;
+        try{
+            rate = Float.parseFloat(payBox.getText());
+            payBox.setText("Is Float: " + rate);
+        }catch (NumberFormatException e){
+            payBox.setText("Not Float!");
+        }
         Profile empProfile = getEnteredProfile();
 
         if (Position.getSelectedToggle().toString() == "PTRB") {
@@ -156,7 +167,13 @@ public class Controller {
     }
 
     public void setHours(ActionEvent actionEvent) {
-        Float hours = (float) Integer.parseInt(hourBox.getText());
+        Float hours = null;
+        try{
+            hours = Float.parseFloat(payBox.getText());
+            payBox.setText("Is Float: " + hours);
+        }catch (NumberFormatException e){
+            payBox.setText("Not Float!");
+        }
         Profile empProfile = getEnteredProfile();
         Parttime toUpdate = new Parttime(empProfile);
         toUpdate.setHours(hours);
