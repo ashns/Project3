@@ -1,5 +1,5 @@
 import java.util.Calendar;
-
+import java.util.StringTokenizer;
 /**
  * Represents a calendar date and its properties.
  * Provides parameterized constructor to create specific dates, and a default 
@@ -83,10 +83,11 @@ public class Date implements Comparable<Date>
 		final int MONTH_INDEX = 0;
 		final int DAY_INDEX = 1;
 		final int YEAR_INDEX = 2;
-		String[] tokens = date.split("/");
-		this.month = Integer.parseInt(tokens[MONTH_INDEX]);
-		this.day = Integer.parseInt(tokens[DAY_INDEX]);
-		this.year = Integer.parseInt(tokens[YEAR_INDEX]);
+		StringTokenizer parse = new StringTokenizer(date, "-");
+		this.year = Integer.parseInt(parse.nextToken());
+		this.month = Integer.parseInt(parse.nextToken());
+		this.day = Integer.parseInt(parse.nextToken());
+
 	}
 
 	/** 

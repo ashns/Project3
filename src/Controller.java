@@ -79,6 +79,8 @@ public class Controller {
 
         if (last != "")
             display.setText("Recieved name: " + last + "\n");
+
+        display.setText(display.getText() + "Date recieved:" + dateBox.getValue().toString());
     }
 
     public void rateChange(ActionEvent actionEvent) {
@@ -120,6 +122,7 @@ public class Controller {
             com.add(newHire);
         }
         com.print();
+
     }
 
     public int getManagementPosition(){
