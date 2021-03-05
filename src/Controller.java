@@ -32,6 +32,8 @@ public class Controller {
     TextField hourBox = new TextField();
     @FXML
     FileChooser databaseFile = new FileChooser();
+    @FXML
+    ToggleGroup Management = new ToggleGroup();
 
     StringTokenizer parse;
 
@@ -97,10 +99,25 @@ public class Controller {
             Fulltime newHire = new Fulltime(hireProfile, rate);
             com.add(newHire);
         } else {
-            Management newHire = new Management(hireProfile, rate, 1);
+            Management newHire = new Management(hireProfile, rate, getManagementPosition());
             com.add(newHire);
         }
         com.print();
+    }
+
+    public int getManagementPosition(){
+        final int manager = 1;
+        final int departmentHead = 2;
+        final int districtHead = 3;
+        if(Management.getSelectedToggle().toString()=="managerRB"){
+            return manager;
+        }
+        else if(Management.getSelectedToggle().toString()=="DepartmentRB"){
+            return departmentHead;
+        }
+        else{
+            return districtHead;
+        }
     }
 
     public void remove(ActionEvent actionEvent) {
@@ -114,8 +131,7 @@ public class Controller {
             Fulltime oldHire = new Fulltime(empProfile, rate);
             com.remove(oldHire);
         } else {
-            Management oldHire = new Management(empProfile, rate, 1);
-            com.remove(oldHire);
+            Management oldHire = new Management(empProfile, rate, getManagementPosition());
         }
     }
 
