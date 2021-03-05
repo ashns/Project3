@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0">
+         <bottom>
+            <Label fx:id="display" alignment="TOP_LEFT" prefHeight="124.0" prefWidth="603.0" text="Text Goes Here" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="MS Gothic" size="12.0" />
+               </font></Label>
+         </bottom>
+         <center>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab text="Edit Database">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="600.0">
+                           <children>
+                              <TextField fx:id="nameBox" layoutX="75.0" layoutY="14.0" prefHeight="25.0" prefWidth="265.0" />
+                              <Label layoutX="40.0" layoutY="18.0" text="Name:" />
+                              <DatePicker fx:id="dateBox" layoutX="412.0" layoutY="14.0" />
+                              <Label layoutX="347.0" layoutY="18.0" text="Hire date:" />
+                              <VBox layoutX="14.0" layoutY="53.0" prefHeight="91.0" prefWidth="100.0" spacing="5.0">
+                                 <children>
+                                    <Label text="Department:" />
+                                    <RadioButton fx:id="CSRB" mnemonicParsing="false" selected="true" text="CS">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Dept" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="ECERB" mnemonicParsing="false" text="ECE" toggleGroup="$Dept" />
+                                    <RadioButton fx:id="ITRB" mnemonicParsing="false" text="IT" toggleGroup="$Dept" />
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="114.0" layoutY="54.0" prefHeight="89.0" prefWidth="100.0" spacing="5.0">
+                                 <children>
+                                    <Label text="Position:" />
+                                    <RadioButton fx:id="PTRB" mnemonicParsing="false" onAction="#rateChange" selected="true" text="Part Time">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Position" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="FTRB" mnemonicParsing="false" onAction="#salaryChange" text="Full Time" toggleGroup="$Position" />
+                                    <RadioButton fx:id="MGRB" mnemonicParsing="false" onAction="#salaryChange" text="Management" toggleGroup="$Position" />
+                                 </children>
+                              </VBox>
+                              <TextField fx:id="payBox" layoutX="299.0" layoutY="54.0" />
+                              <Label layoutX="239.0" layoutY="58.0" text="Payment: $" />
+                              <Label fx:id="rateLabel" layoutX="448.0" layoutY="58.0" text="/ hour" />
+                              <Label layoutX="239.0" layoutY="90.0" text="Hours worked: " />
+                              <TextField fx:id="hourBox" layoutX="325.0" layoutY="86.0" prefHeight="25.0" prefWidth="58.0" />
+                              <HBox alignment="CENTER" layoutY="144.0" prefHeight="35.0" prefWidth="600.0" spacing="15.0">
+                                 <children>
+                                    <Button fx:id="addBtn" mnemonicParsing="false" onAction="#add" prefWidth="125.0" text="Add" />
+                                    <Button fx:id="removeBtn" mnemonicParsing="false" onAction="#remove" prefWidth="125.0" text="Remove" />
+                                    <Button fx:id="hourBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" text="Change Hours" />
+                                    <Button fx:id="clearBtn" mnemonicParsing="false" prefHeight="25.0" onAction="#clear" prefWidth="125.0" text="Clear" />
+                                 </children>
+                              </HBox>
+                              <Line endX="499.0" layoutX="101.0" layoutY="247.0" startX="-100.0" />
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="View Database">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
