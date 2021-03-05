@@ -36,6 +36,14 @@ public class Controller {
     FileChooser databaseFile = new FileChooser();
     @FXML
     ToggleGroup Management = new ToggleGroup();
+    @FXML
+    ToggleGroup Print = new ToggleGroup();
+    @FXML
+    Button importBTN = new Button();
+    @FXML
+    Button exportBTN = new Button();
+    @FXML
+    Button processBTN = new Button();
 
     StringTokenizer parse;
 
