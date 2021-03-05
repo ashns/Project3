@@ -74,7 +74,7 @@ public class Controller {
     }
 
     public void rateChange(ActionEvent actionEvent) {
-        payLabel.setText("Hourly Wage: $");
+        payLabel.setText("Hourly Rate: $");
         rateLabel.setText("/ hour");
     }
 

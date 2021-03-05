@@ -54,7 +54,7 @@
                                  </children>
                               </VBox>
                               <TextField fx:id="payBox" layoutX="299.0" layoutY="54.0" />
-                              <Label fx:id="payLabel" alignment="CENTER_RIGHT" layoutX="213.0" layoutY="58.0" text="Annual Salary: $" />
+                              <Label fx:id="payLabel" alignment="CENTER_RIGHT" layoutX="213.0" layoutY="58.0" text="Hourly Rate: $" />
                               <Label fx:id="rateLabel" layoutX="448.0" layoutY="58.0" text="/ hour" />
                               <Label layoutX="239.0" layoutY="90.0" text="Hours worked: " />
                               <TextField fx:id="hourBox" layoutX="325.0" layoutY="86.0" prefHeight="25.0" prefWidth="58.0" />
