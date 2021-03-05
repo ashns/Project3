@@ -81,7 +81,24 @@
                 </Tab>
                 <Tab text="View Database">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox alignment="CENTER" layoutX="18.0" layoutY="20.0" prefHeight="34.0" prefWidth="573.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Print:" />
+                                    <RadioButton fx:id="printRB" mnemonicParsing="false" selected="true" text="As is">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Print" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="printByDateRB" mnemonicParsing="false" text="By Hire Date" toggleGroup="$Print" />
+                                    <RadioButton fx:id="printByDeptRB" mnemonicParsing="false" text="By Department" toggleGroup="$Print" />
+                                    <Button fx:id="printBTN" mnemonicParsing="false" text="Print Database" />
+                                 </children>
+                              </HBox>
+                              <Button fx:id="importBTN" layoutX="104.0" layoutY="54.0" mnemonicParsing="false" text="Import Database" />
+                              <Button fx:id="exportBTN" layoutX="401.0" layoutY="54.0" mnemonicParsing="false" text="Export Database" />
+                           </children></AnchorPane>
                   </content>
                 </Tab>
               </tabs>
