@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 public class Controller {
     @FXML
-    Label display = new Label();
+    TextArea display = new TextArea();
     @FXML
     Label rateLabel = new Label();
     @FXML
