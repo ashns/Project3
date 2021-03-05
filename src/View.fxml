@@ -92,7 +92,7 @@
                                     </RadioButton>
                                     <RadioButton fx:id="printByDateRB" mnemonicParsing="false" text="By Hire Date" toggleGroup="$Print" />
                                     <RadioButton fx:id="printByDeptRB" mnemonicParsing="false" text="By Department" toggleGroup="$Print" />
-                                    <Button fx:id="printBTN" mnemonicParsing="false" text="Print Database" />
+                                    <Button fx:id="printBTN" mnemonicParsing="false" onAction="#printDatabase" text="Print Database" />
                                  </children>
                               </HBox>
                               <Button fx:id="importBTN" layoutX="104.0" layoutY="54.0" mnemonicParsing="false" text="Import Database" />

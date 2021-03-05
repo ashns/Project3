@@ -90,11 +90,21 @@ public class Controller {
         payLabel.setText("Annual Salary: $");
         rateLabel.setText("/ year");
     }
-
+    public String formatDate(){
+        final int MONTH_INDEX = 1;
+        final int DAY_INDEX = 2;
+        final int YEAR_INDEX = 0;
+        String[] tokens = dateBox.getValue().toString().split("-");
+        String tempDate = "";
+        tempDate += Integer.parseInt(tokens[MONTH_INDEX]) + "/";
+        tempDate += Integer.parseInt(tokens[DAY_INDEX]) +"/";
+        tempDate += Integer.parseInt(tokens[YEAR_INDEX]);
+        return tempDate;
+    }
     public Profile getEnteredProfile() {
         String name = nameBox.getText();
         String department = Dept.getSelectedToggle().toString();
-        Date hireDate = new Date(dateBox.getValue().toString());
+        Date hireDate = new Date(formatDate());
         Profile empProfile = new Profile(name, department, hireDate);
         return empProfile;
     }
@@ -109,17 +119,16 @@ public class Controller {
         }
         Profile hireProfile = getEnteredProfile();
 
-        if (Position.getSelectedToggle().toString() == "PTRB") {
+        if (Position.getSelectedToggle().equals("PTRB")) {
             Parttime newHire = new Parttime(hireProfile, rate);
             com.add(newHire);
-        } else if (Position.getSelectedToggle().toString() == "FTRB") {
+        } else if (Position.getSelectedToggle().equals("FTRB")) {
             Fulltime newHire = new Fulltime(hireProfile, rate);
             com.add(newHire);
         } else {
             Management newHire = new Management(hireProfile, rate, getManagementPosition());
             com.add(newHire);
         }
-        com.print();
     }
 
     public int getManagementPosition(){
@@ -203,4 +212,7 @@ public class Controller {
         }
     }
 
+    public void printDatabase(ActionEvent actionEvent) {
+        com.print();
+    }
 }
