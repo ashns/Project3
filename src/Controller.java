@@ -44,6 +44,12 @@ public class Controller {
     Button exportBTN = new Button();
     @FXML
     Button processBTN = new Button();
+    @FXML
+    RadioButton PTRB = new RadioButton();
+    @FXML
+    RadioButton FTRB = new RadioButton();
+    @FXML
+    RadioButton MGRB = new RadioButton();
 
     StringTokenizer parse;
 
@@ -90,7 +96,6 @@ public class Controller {
         payLabel.setText("Annual Salary: $");
         rateLabel.setText("/ year");
     }
-
     public String formatDate(){
         final int MONTH_INDEX = 1;
         final int DAY_INDEX = 2;
@@ -98,13 +103,10 @@ public class Controller {
         String[] tokens = dateBox.getValue().toString().split("-");
         String tempDate = "";
         tempDate += Integer.parseInt(tokens[MONTH_INDEX]) + "/";
-        tempDate += Integer.parseInt(tokens[DAY_INDEX]) + "/";
+        tempDate += Integer.parseInt(tokens[DAY_INDEX]) +"/";
         tempDate += Integer.parseInt(tokens[YEAR_INDEX]);
-        System.out.println("Here is the date: " + tempDate.toString());
         return tempDate;
-
     }
-
     public Profile getEnteredProfile() {
         String name = nameBox.getText();
         String department = Dept.getSelectedToggle().toString();
@@ -123,13 +125,13 @@ public class Controller {
         }
         Profile hireProfile = getEnteredProfile();
 
-        if (Position.getSelectedToggle().toString().equals("PTRB")) {
+        if (Position.getSelectedToggle() == PTRB) {
             Parttime newHire = new Parttime(hireProfile, rate);
             com.add(newHire);
-        } else if (Position.getSelectedToggle().equals("FTRB")) {
+        } else if (Position.getSelectedToggle() == FTRB) {
             Fulltime newHire = new Fulltime(hireProfile, rate);
             com.add(newHire);
-        } else {
+        } else if (Position.getSelectedToggle() == MGRB){
             Management newHire = new Management(hireProfile, rate, getManagementPosition());
             com.add(newHire);
         }
@@ -139,10 +141,10 @@ public class Controller {
         final int manager = 1;
         final int departmentHead = 2;
         final int districtHead = 3;
-        if(Management.getSelectedToggle().toString().equals("managerRB")){
+        if(Management.getSelectedToggle().toString()=="managerRB"){
             return manager;
         }
-        else if(Management.getSelectedToggle().toString().equals("DepartmentRB")){
+        else if(Management.getSelectedToggle().toString()=="DepartmentRB"){
             return departmentHead;
         }
         else{
@@ -160,10 +162,10 @@ public class Controller {
         }
         Profile empProfile = getEnteredProfile();
 
-        if (Position.getSelectedToggle().toString() == "PTRB") {
+        if (Position.getSelectedToggle() == PTRB) {
             Parttime oldHire = new Parttime(empProfile, rate);
             com.remove(oldHire);
-        } else if (Position.getSelectedToggle().toString() == "FTRB") {
+        } else if (Position.getSelectedToggle() == FTRB) {
             Fulltime oldHire = new Fulltime(empProfile, rate);
             com.remove(oldHire);
         } else {
@@ -217,12 +219,6 @@ public class Controller {
     }
 
     public void printDatabase(ActionEvent actionEvent) {
-        if (Print.getSelectedToggle().toString() == "PrintRB") {
-            com.print();
-        } else if (Print.getSelectedToggle().toString() == "printByDateRB") {
-            com.printByDate();
-        } else {
-            com.printByDepartment();
-        }
+        com.print();
     }
 }
