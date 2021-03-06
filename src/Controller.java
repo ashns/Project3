@@ -90,6 +90,7 @@ public class Controller {
         payLabel.setText("Annual Salary: $");
         rateLabel.setText("/ year");
     }
+
     public String formatDate(){
         final int MONTH_INDEX = 1;
         final int DAY_INDEX = 2;
@@ -97,10 +98,13 @@ public class Controller {
         String[] tokens = dateBox.getValue().toString().split("-");
         String tempDate = "";
         tempDate += Integer.parseInt(tokens[MONTH_INDEX]) + "/";
-        tempDate += Integer.parseInt(tokens[DAY_INDEX]) +"/";
+        tempDate += Integer.parseInt(tokens[DAY_INDEX]) + "/";
         tempDate += Integer.parseInt(tokens[YEAR_INDEX]);
+        System.out.println("Here is the date: " + tempDate.toString());
         return tempDate;
+
     }
+
     public Profile getEnteredProfile() {
         String name = nameBox.getText();
         String department = Dept.getSelectedToggle().toString();
@@ -119,7 +123,7 @@ public class Controller {
         }
         Profile hireProfile = getEnteredProfile();
 
-        if (Position.getSelectedToggle().equals("PTRB")) {
+        if (Position.getSelectedToggle().toString().equals("PTRB")) {
             Parttime newHire = new Parttime(hireProfile, rate);
             com.add(newHire);
         } else if (Position.getSelectedToggle().equals("FTRB")) {
@@ -135,10 +139,10 @@ public class Controller {
         final int manager = 1;
         final int departmentHead = 2;
         final int districtHead = 3;
-        if(Management.getSelectedToggle().toString()=="managerRB"){
+        if(Management.getSelectedToggle().toString().equals("managerRB")){
             return manager;
         }
-        else if(Management.getSelectedToggle().toString()=="DepartmentRB"){
+        else if(Management.getSelectedToggle().toString().equals("DepartmentRB")){
             return departmentHead;
         }
         else{
@@ -213,6 +217,12 @@ public class Controller {
     }
 
     public void printDatabase(ActionEvent actionEvent) {
-        com.print();
+        if (Print.getSelectedToggle().toString() == "PrintRB") {
+            com.print();
+        } else if (Print.getSelectedToggle().toString() == "printByDateRB") {
+            com.printByDate();
+        } else {
+            com.printByDepartment();
+        }
     }
 }
