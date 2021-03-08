@@ -50,6 +50,18 @@ public class Controller {
     RadioButton FTRB = new RadioButton();
     @FXML
     RadioButton MGRB = new RadioButton();
+    @FXML
+    RadioButton printRB = new RadioButton();
+    @FXML
+    RadioButton printByDateRB = new RadioButton();
+    @FXML
+    RadioButton printByDeptRB = new RadioButton();
+    @FXML
+    RadioButton CSRB = new RadioButton();
+    @FXML
+    RadioButton ECERB = new RadioButton();
+    @FXML
+    RadioButton ITRB = new RadioButton();
 
     StringTokenizer parse;
 
@@ -119,9 +131,13 @@ public class Controller {
         Float rate = null;
         try{
             rate = Float.parseFloat(payBox.getText());
-            payBox.setText("Is Float: " + rate);
+            //payBox.setText("Is Float: " + rate);
         }catch (NumberFormatException e){
-            payBox.setText("Not Float!");
+            display.setText("Please enter a valid ");
+            if(Position.getSelectedToggle() == PTRB)
+                display.setText(display.getText() + "Hourly Wage.\n");
+            else
+                display.setText(display.getText() + "Annual Salary.\n");
         }
         Profile hireProfile = getEnteredProfile();
 
@@ -156,9 +172,13 @@ public class Controller {
         Float rate = null;
         try{
             rate = Float.parseFloat(payBox.getText());
-            payBox.setText("Is Float: " + rate);
+            //payBox.setText("Is Float: " + rate);
         }catch (NumberFormatException e){
-            payBox.setText("Not Float!");
+            display.setText("Please enter a valid ");
+            if(Position.getSelectedToggle() == PTRB)
+                display.setText(display.getText() + "Hourly Wage.\n");
+            else
+                display.setText(display.getText() + "Annual Salary.\n");
         }
         Profile empProfile = getEnteredProfile();
 
