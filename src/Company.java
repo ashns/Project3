@@ -144,7 +144,7 @@ public class Company {
      */
     public void print() {
         System.out.println("--Printing earning statements for all employees--");
-        this.genPrint();
+        this.toString();
     }
 
     /**
@@ -165,7 +165,7 @@ public class Company {
             emplist[i] = localMin;
             emplist[iMin] = temp;
         }
-        this.genPrint();
+        this.toString();
     }
 
     /**
@@ -186,7 +186,7 @@ public class Company {
             emplist[i] = localMin;
             emplist[iMin] = temp;
         }
-        this.genPrint();
+        this.toString();
     }
 
     /**
