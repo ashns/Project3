@@ -197,15 +197,15 @@ public class Company {
         for (int i = 0; i < this.numEmployee; i++) {
             if (this.emplist[i] instanceof Parttime) {
                 Parttime temp = (Parttime) this.emplist[i];
-                contents+=temp.toString();
+                contents+=temp.toString() + "\n";
             } else if (this.emplist[i] instanceof Fulltime) {
                 if (this.emplist[i] instanceof Management) {
                     Management temp = (Management) this.emplist[i];
-                    contents+=(temp.toString());
+                    contents+=(temp.toString() + "\n");
                     continue;
                 }
                 Fulltime temp = (Fulltime) this.emplist[i];
-                contents+=(temp.toString());
+                contents+=(temp.toString() + "\n");
             }
         }
         return contents;

@@ -1,7 +1,10 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -106,11 +109,13 @@ public class Controller {
     public void rateChange(ActionEvent actionEvent) {
         payLabel.setText("Hourly Rate: $");
         rateLabel.setText("/ hour");
+
     }
 
     public void salaryChange(ActionEvent actionEvent) {
         payLabel.setText("Annual Salary: $");
         rateLabel.setText("/ year");
+
     }
     public String formatDate(){
         final int MONTH_INDEX = 1;
@@ -228,7 +233,9 @@ public class Controller {
     }
 
     public void importFile(ActionEvent actionEvent) throws FileNotFoundException {
-
+       // Node node = (Node) actionEvent.getSource();
+       // Window window = node.getScene().getWindow();
+       // databaseFile.setTitle("Open Database File");
         File file = databaseFile.showOpenDialog(null);
         Scanner myReader = new Scanner(file);
         while (myReader.hasNextLine()) {
@@ -253,5 +260,22 @@ public class Controller {
 
     public void printDatabase(ActionEvent actionEvent) {
         com.print();
+    }
+
+    public void disableFields(ActionEvent actionEvent) {
+        if(PTRB.isSelected()){
+            managerRB.setDisable(true);
+            DepartmentRB.setDisable(true);
+            FTRB.setDisable(true);
+        }
+        else if(FTRB.isSelected()){
+            managerRB.setDisable(true);
+            DepartmentRB.setDisable(true);
+            PTRB.setDisable(true);
+        }
+        else{
+            PTRB.setDisable(true);
+            FTRB.setDisable(true);
+        }
     }
 }

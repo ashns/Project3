@@ -32,13 +32,13 @@
                               <VBox layoutX="14.0" layoutY="53.0" prefHeight="91.0" prefWidth="100.0" spacing="5.0">
                                  <children>
                                     <Label text="Department:" />
-                                    <RadioButton fx:id="CSRB" mnemonicParsing="false" selected="true" text="CS">
+                                    <RadioButton fx:id="CSRB" mnemonicParsing="false" onAction="#disableFields" selected="true" text="CS">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="Dept" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="ECERB" mnemonicParsing="false" text="ECE" toggleGroup="$Dept" />
-                                    <RadioButton fx:id="ITRB" mnemonicParsing="false" text="IT" toggleGroup="$Dept" />
+                                    <RadioButton fx:id="ECERB" mnemonicParsing="false" onAction="#disableFields" text="ECE" toggleGroup="$Dept" />
+                                    <RadioButton fx:id="ITRB" mnemonicParsing="false" onAction="#disableFields" text="IT" toggleGroup="$Dept" />
                                  </children>
                               </VBox>
                               <VBox layoutX="114.0" layoutY="54.0" prefHeight="89.0" prefWidth="100.0" spacing="5.0">
@@ -61,13 +61,13 @@
                               <HBox alignment="CENTER" layoutY="144.0" prefHeight="35.0" prefWidth="600.0" spacing="15.0">
                                  <children>
                                     <Label text="Management Position:" />
-                                    <RadioButton fx:id="managerRB" mnemonicParsing="false" text="Manager">
+                                    <RadioButton fx:id="managerRB" mnemonicParsing="false" onAction="#disableFields" text="Manager">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="Management" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="DepartmentRB" mnemonicParsing="false" text="Department Head" toggleGroup="$Management" />
-                                    <RadioButton fx:id="DirectorRB" mnemonicParsing="false" text="Director" toggleGroup="$Management" />
+                                    <RadioButton fx:id="DepartmentRB" mnemonicParsing="false" onAction="#disableFields" text="Department Head" toggleGroup="$Management" />
+                                    <RadioButton fx:id="DirectorRB" mnemonicParsing="false" onAction="#disableFields" text="Director" toggleGroup="$Management" />
                                  </children>
                               </HBox>
                               <Line endX="499.0" layoutX="101.0" layoutY="247.0" startX="-100.0" />
@@ -95,8 +95,8 @@
                                     <Button fx:id="printBTN" mnemonicParsing="false" onAction="#printDatabase" text="Print Database" />
                                  </children>
                               </HBox>
-                              <Button fx:id="importBTN" layoutX="104.0" layoutY="54.0" mnemonicParsing="false" text="Import Database" />
-                              <Button fx:id="exportBTN" layoutX="401.0" layoutY="54.0" mnemonicParsing="false" text="Export Database" />
+                              <Button fx:id="importBTN" layoutX="104.0" layoutY="54.0" mnemonicParsing="false" onAction="#importFile" text="Import Database" />
+                              <Button fx:id="exportBTN" layoutX="401.0" layoutY="54.0" mnemonicParsing="false" onAction="#exportDatabase" text="Export Database" />
                               <Button fx:id="processBTN" layoutX="248.0" layoutY="97.0" mnemonicParsing="false" text="Process Paychecks" />
                            </children></AnchorPane>
                   </content>
