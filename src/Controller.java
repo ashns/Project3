@@ -94,9 +94,9 @@ public class Controller {
      * formatted to create a date object from date.class
      */
     public String formatDate() {
-        final int MONTH_INDEX = 0;
-        final int DAY_INDEX = 1;
-        final int YEAR_INDEX = 2;
+        final int MONTH_INDEX = 1;
+        final int DAY_INDEX = 2;
+        final int YEAR_INDEX = 0;
 
         String tempDate = "";
         String[] tokens;

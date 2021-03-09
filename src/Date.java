@@ -81,9 +81,6 @@ public class Date implements Comparable<Date>
 	 */
 	public Date(String date)
 	{
-		final int MONTH_INDEX = 0;
-		final int DAY_INDEX = 1;
-		final int YEAR_INDEX = 2;
 
 		StringTokenizer parse = new StringTokenizer(date, "/");
 
