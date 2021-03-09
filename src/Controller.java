@@ -248,52 +248,8 @@ public class Controller {
                 continue;
             }
             String firstToken = scLine.next();
-            if (firstToken.equals("PA")) {
-                //print in sequence
-                if (scLine.hasNext()) {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
-                scLine.close();
-                if (com.getNumEmployees() == 0) {
-                    System.out.println("Employee database is empty.");
-                } else {
-                    com.print();
-                }
-                continue;
-            }
-            if (firstToken.equals("PH")) {
-                //print by date
-                if (scLine.hasNext()) {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
-                scLine.close();
-                if (com.getNumEmployees() == 0) {
-                    System.out.println("Employee database is empty.");
-                } else {
-                    com.printByDate();
-                }
-                continue;
-            }
-            if (firstToken.equals("PD")) {
-                //print by department
-                if (scLine.hasNext()) {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
-                scLine.close();
-                if (com.getNumEmployees() == 0) {
-                    System.out.println("Employee database is empty.");
-                } else {
-                    com.printByDepartment();
-                }
-                continue;
-            }
-            if (firstToken.equals("AP")) {
+
+            if (firstToken.equals("P")) {
                 Profile hireProfile = readProfile(scLine);
                 if (hireProfile == null) {
                     scLine.close();
@@ -332,7 +288,7 @@ public class Controller {
                 }
                 continue;
             }
-            if (firstToken.equals("AF")) {
+            if (firstToken.equals("F")) {
                 Profile hireProfile = readProfile(scLine);
                 if (hireProfile == null) {
                     scLine.close();
@@ -370,7 +326,7 @@ public class Controller {
                 }
                 continue;
             }
-            if (firstToken.equals("AM")) {
+            if (firstToken.equals("M")) {
                 Profile hireProfile = readProfile(scLine);
                 if (hireProfile == null) {
                     scLine.close();
@@ -422,120 +378,6 @@ public class Controller {
                 }
                 continue;
             }
-            if (firstToken.equals("R")) {
-                //remove an employee
-                Profile rProfile = readProfile(scLine);
-                if (rProfile == null) {
-                    scLine.close();
-                    continue;
-                }
-
-                //check for trailing tokens
-                if (scLine.hasNext()) {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
-                scLine.close();
-                if (com.getNumEmployees() == 0) {
-                    System.out.println("Employee database is empty.");
-                    continue;
-                }
-                Employee toRemove = new Employee(rProfile);
-                if (com.remove(toRemove)) {
-                    System.out.println("Employee removed.");
-                } else {
-                    System.out.println("Employee does not exist.");
-                }
-
-                continue;
-
-            }
-            if (firstToken.equals("S")) {
-                //set working hours
-                if (com.getNumEmployees() == 0) {
-                    System.out.println("Employee database is empty.");
-                    scLine.close();
-                    continue;
-                }
-
-                Profile sProfile = readProfile(scLine);
-                if (sProfile == null) {
-                    scLine.close();
-                    continue;
-                }
-                //read hours
-                float hours;
-                if (scLine.hasNextFloat()) {
-                    hours = scLine.nextFloat();
-                } else {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
-                if (hours < 0) {
-                    System.out.println("Working hours cannot be negative.");
-                    continue;
-                }
-                if (hours > 100) {
-                    System.out.println("Invalid Hours: over 100.");
-                    continue;
-                }
-
-                //check for trailing tokens
-                if (scLine.hasNext()) {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
-                scLine.close();
-                if (com.getNumEmployees() == 0) {
-                    System.out.println("Employee database is empty.");
-                    continue;
-                }
-                Parttime toUpdate = new Parttime(sProfile);
-                toUpdate.setHours(hours);
-                if (com.setHours(toUpdate)) {
-                    System.out.println("Working hours set.");
-                } else {
-                    System.out.println("Employee does not exist.");
-                }
-                continue;
-            }
-            if (firstToken.equals("C")) {
-                //calculate payments
-
-                //check for trailing tokens
-                if (scLine.hasNext()) {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
-                scLine.close();
-                if (com.getNumEmployees() == 0) {
-                    System.out.println("Employee database is empty.");
-                    continue;
-                } else {
-                    com.processPayments();
-                    System.out.println("Calculation of employee payments is done.");
-                }
-                continue;
-            }
-            if (firstToken.equals("Q")) {
-                //check for trailing tokens
-                if (scLine.hasNext()) {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
-                scLine.close();
-                System.out.println("Payroll Processing completed.");
-                break;
-            }
-            //invalid input
-            System.out.println("Command \'" + firstToken + "\' not supported!");
-            scLine.close();
-            continue;
         }
         myReader.close();
     }
