@@ -86,11 +86,16 @@ public class Controller {
         final int MONTH_INDEX = 0;
         final int DAY_INDEX = 1;
         final int YEAR_INDEX = 2;
-        String[] tokens = dateBox.getValue().toString().split("-");
+
         String tempDate = "";
-        tempDate += Integer.parseInt(tokens[MONTH_INDEX]) + "/";
-        tempDate += Integer.parseInt(tokens[DAY_INDEX]) + "/";
-        tempDate += Integer.parseInt(tokens[YEAR_INDEX]);
+        String[] tokens;
+
+        if(dateBox.getValue() != null) {
+            tokens = dateBox.getValue().toString().split("-");
+            tempDate += Integer.parseInt(tokens[MONTH_INDEX]) + "/";
+            tempDate += Integer.parseInt(tokens[DAY_INDEX]) + "/";
+            tempDate += Integer.parseInt(tokens[YEAR_INDEX]);
+        }
         return tempDate;
     }
 
@@ -106,10 +111,11 @@ public class Controller {
         }
         Date hireDate = new Date(formatDate());
         Profile empProfile = null;
-        if(hireDate.isValid())
+        
             empProfile = new Profile(name, department, hireDate);
-        else
-            display.setText("Please select a valid date.");
+
+            //display.setText("Please select a valid date.");
+
         return empProfile;
     }
 
@@ -125,6 +131,7 @@ public class Controller {
             else
                 display.setText(display.getText() + "Annual Salary.\n");
         }
+
         Profile hireProfile = getEnteredProfile();
         if (hireProfile != null) {
 
