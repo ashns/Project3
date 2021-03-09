@@ -644,4 +644,9 @@ public class Controller {
         return new Profile(tokens[iName], tokens[iDept], hireDate);
     }
 
+    public void process(ActionEvent e){
+        com.processPayments();
+        display.setText("Calculation of employee payments are done.");
+    }
+
 }
