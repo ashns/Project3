@@ -1,12 +1,10 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 
@@ -173,7 +171,7 @@ public class Controller {
     public void remove(ActionEvent actionEvent) {
         Float rate = null;
         try {
-            rate = Float.parseFloat(payBox.getText());;
+            rate = Float.parseFloat(payBox.getText());
         } catch (NumberFormatException e) {
             display.setText("Please enter a valid rate.");
             if (Position.getSelectedToggle() == PTRB)
@@ -340,8 +338,6 @@ public class Controller {
      * @return profile object with input information
      */
     private Profile readProfile(String[] array) {
-        int iFirstName = 0;
-        int iLastName= 1;
         int iName = 1;
         int iDept = 2;
         int iDate = 3;
