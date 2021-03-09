@@ -44,13 +44,13 @@
                               <VBox layoutX="114.0" layoutY="54.0" prefHeight="89.0" prefWidth="100.0" spacing="5.0">
                                  <children>
                                     <Label text="Position:" />
-                                    <RadioButton fx:id="PTRB" mnemonicParsing="false" onAction="#rateChange" selected="true" text="Part Time">
+                                    <RadioButton fx:id="PTRB" mnemonicParsing="false" onAction="#disableFields" selected="true" text="Part Time">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="Position" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="FTRB" mnemonicParsing="false" onAction="#salaryChange" text="Full Time" toggleGroup="$Position" />
-                                    <RadioButton fx:id="MGRB" mnemonicParsing="false" onAction="#salaryChange" text="Management" toggleGroup="$Position" />
+                                    <RadioButton fx:id="FTRB" mnemonicParsing="false" onAction="#disableFields" text="Full Time" toggleGroup="$Position" />
+                                    <RadioButton fx:id="MGRB" mnemonicParsing="false" onAction="#disableFields" text="Management" toggleGroup="$Position" />
                                  </children>
                               </VBox>
                               <TextField fx:id="payBox" layoutX="299.0" layoutY="54.0" />
