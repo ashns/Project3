@@ -71,6 +71,8 @@ public class Controller {
     Label hourLabel = new Label();
     @FXML
     Label positionLabel = new Label();
+    @FXML
+    Button hourBtn = new Button();
 
     final int MAX_HOURS = 100;
 
@@ -309,6 +311,7 @@ public class Controller {
             hourBox.setDisable(false);
             hourLabel.setDisable(false);
             positionLabel.setDisable(true);
+            hourBtn.setDisable(false);
             payLabel.setText("Hourly Rate: $");
             rateLabel.setText("/ hour");
         } else if (FTRB.isSelected()) {
@@ -318,6 +321,7 @@ public class Controller {
             hourBox.setDisable(true);
             hourLabel.setDisable(true);
             positionLabel.setDisable(true);
+            hourBtn.setDisable(true);
             payLabel.setText("Annual Salary: $");
             rateLabel.setText("/ year");
         } else if (MGRB.isSelected()) {
@@ -327,6 +331,7 @@ public class Controller {
             hourBox.setDisable(true);
             hourLabel.setDisable(true);
             positionLabel.setDisable(false);
+            hourBtn.setDisable(true);
             payLabel.setText("Annual Salary: $");
             rateLabel.setText("/ year");
         }
