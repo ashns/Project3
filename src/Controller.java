@@ -76,41 +76,9 @@ public class Controller {
     @FXML
     Label positionLabel = new Label();
 
-    StringTokenizer parse;
+
     final int NUM_TOKENS_PROFILE = 3;
     Company com = new Company();
-
-    public void dataTest(ActionEvent actionEvent) {
-        String last = "", first = "";
-        char middle = ' ';
-        parse = new StringTokenizer(nameBox.getText());
-        switch (parse.countTokens()) {
-            case 1:
-                last = parse.nextToken();
-                break;
-            case 2:
-                first = parse.nextToken();
-                last = parse.nextToken();
-                break;
-            case 3:
-                first = parse.nextToken();
-                middle = parse.nextToken().charAt(0);
-                last = parse.nextToken();
-                break;
-            default:
-                display.setText("Please enter a valid name.");
-                break;
-        }
-
-        if (first != "")
-            last += ", " + first;
-
-        if (middle != ' ')
-            last += " " + middle + ".";
-
-        if (last != "")
-            display.setText("Recieved name: " + last + "\n");
-    }
 
     public String formatDate() {
         final int MONTH_INDEX = 0;
