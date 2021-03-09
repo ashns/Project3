@@ -241,42 +241,17 @@ public class Controller {
 
     public void importFile(ActionEvent actionEvent) throws FileNotFoundException {
         File file = databaseFile.showOpenDialog(null);
-        Scanner myReader = new Scanner(file);
-        while (myReader.hasNextLine()) {
-            Scanner scLine = new Scanner(myReader.nextLine());
-            if (!scLine.hasNext()) {
-                continue;
-            }
-            String firstToken = scLine.next();
-
+        Scanner fileReader = new Scanner(file);
+        while (fileReader.hasNext()) {
+            Scanner scLine = new Scanner(file);
+            String currentLine = fileReader.nextLine();
+            String[] arrayOfInput = currentLine.split(",", 5);
+            String firstToken = arrayOfInput[0];
+            System.out.println(firstToken);
             if (firstToken.equals("P")) {
-                Profile hireProfile = readProfile(scLine);
-                if (hireProfile == null) {
-                    scLine.close();
-                    continue;
-                }
+                Profile hireProfile = readProfile(arrayOfInput);
                 //read rate
-                float rate;
-                if (scLine.hasNextFloat()) {
-                    rate = scLine.nextFloat();
-                } else {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
-
-                if (rate < 0) {
-                    System.out.println("Pay rate cannot be negative.");
-                    scLine.close();
-                    continue;
-                }
-
-                //check for trailing tokens
-                if (scLine.hasNext()) {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
+                float rate = Float.parseFloat(arrayOfInput[4]);
                 scLine.close();
 
                 Parttime newHire = new Parttime(hireProfile, rate);
@@ -289,32 +264,10 @@ public class Controller {
                 continue;
             }
             if (firstToken.equals("F")) {
-                Profile hireProfile = readProfile(scLine);
-                if (hireProfile == null) {
-                    scLine.close();
-                    continue;
-                }
+                Profile hireProfile = readProfile(arrayOfInput);
                 //read salary
-                float salary;
-                if (scLine.hasNextFloat()) {
-                    salary = scLine.nextFloat();
-                } else {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
-                if (salary < 0) {
-                    System.out.println("Salary cannot be negative.");
-                    scLine.close();
-                    continue;
-                }
+                float salary = Float.parseFloat(arrayOfInput[4]);
 
-                //check for trailing tokens
-                if (scLine.hasNext()) {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
                 scLine.close();
 
                 Fulltime newHire = new Fulltime(hireProfile, salary);
@@ -326,47 +279,12 @@ public class Controller {
                 }
                 continue;
             }
-            if (firstToken.equals("M")) {
-                Profile hireProfile = readProfile(scLine);
-                if (hireProfile == null) {
-                    scLine.close();
-                    continue;
-                }
-                //read salary
-                float salary;
-                if (scLine.hasNextFloat()) {
-                    salary = scLine.nextFloat();
-                } else {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
-                if (salary < 0) {
-                    System.out.println("Salary cannot be negative.");
-                    scLine.close();
-                    continue;
-                }
-                //read management code
-                int code;
-                if (scLine.hasNextInt()) {
-                    code = scLine.nextInt();
-                } else {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
-                if (code < 1 || code > 3) {
-                    System.out.println("Invalid management code.");
-                    scLine.close();
-                    continue;
-                }
 
-                //check for trailing tokens
-                if (scLine.hasNext()) {
-                    System.out.println("Invalid command!");
-                    scLine.close();
-                    continue;
-                }
+            if (firstToken.equals("M")) {
+                Profile hireProfile = readProfile(arrayOfInput);
+                float salary = Float.parseFloat(arrayOfInput[4]);
+                int code = Integer.parseInt(arrayOfInput[5]);
+
                 scLine.close();
 
                 Management newHire = new Management(hireProfile, salary, code);
@@ -378,8 +296,10 @@ public class Controller {
                 }
                 continue;
             }
+
+            scLine.close();
         }
-        myReader.close();
+        fileReader.close();
     }
 
 
@@ -439,35 +359,19 @@ public class Controller {
      * Helper method to clean up code. Checks for trailing tokens while parsing
      * input and looks for invalid input.
      *
-     * @param sc initialized stringTokenizer object parsing a string
+     * @param array initialized array which contains employee information from file
      * @return profile object with input information
      */
-    private Profile readProfile(Scanner sc) {
-        int iName = 0;
-        int iDept = 1;
-        int iDate = 2;
-        String[] tokens = new String[NUM_TOKENS_PROFILE];
-        for (int i = 0; i < NUM_TOKENS_PROFILE; i++) {
-            if (sc.hasNext()) {
-                tokens[i] = sc.next();
-            } else {
-                System.out.println("Invalid command!");
-                return null;
-            }
-        }
-        if (!(tokens[iDept].equals("CS") || tokens[iDept].equals("ECE") ||
-                tokens[iDept].equals("IT"))) {
-            System.out.println("\'" + tokens[iDept] +
-                    "\' is not a valid department code.");
-            return null;
-        }
-        Date hireDate = new Date(tokens[iDate]);
-        if (!hireDate.isValid()) {
-            System.out.println(tokens[iDate] + " is not a valid date!");
-            return null;
-        }
-
-        return new Profile(tokens[iName], tokens[iDept], hireDate);
+    private Profile readProfile(String[] array) {
+        int iFirstName = 0;
+        int iLastName= 1;
+        int iName = 1;
+        int iDept = 2;
+        int iDate = 3;
+        String[] nameArray = array[iName].split(" ", 2);
+        String name = array[iLastName] + "," + array[iFirstName];
+        Date hireDate = new Date(array[iDate]);
+        return new Profile(name, array[iDept], hireDate);
     }
 
 }
