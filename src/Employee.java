@@ -3,10 +3,11 @@
  * Provides default constructor for creating instances
  * Provides client methods: toString, equals, addBonus, setPayment, calculatePayment
  * Provides accessor methods: getDepartment, getDateHired, getPayment
- * @author Ashley Stankovits, Philip Severinov
+ * @author Ashley Stankovits, Matthew Walker
  *
  */
 public class Employee {
+
     private Profile profile;
     private float payment;
 
@@ -46,6 +47,7 @@ public class Employee {
     public Date getDateHired() {
         return this.profile.getDateHired();
     }
+
     /**
      * This method retrieves the payment for an employee instance
      * @return the payment value for an employee for 1 pay period

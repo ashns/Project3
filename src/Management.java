@@ -1,9 +1,10 @@
 /**
- * Container class that defines the data type Management to hold the managing employee information.
+ * Container class that defines the data type Management to hold the managing
+ * employee information.
  * Provides default constructor for creating instances
  * Provides client methods: toString, equals, calculateBonus, calculatePayment
  * Provides accessor methods: getRole
- * @author Ashley Stankovits, Philip Severinov
+ * @author Ashley Stankovits, Matthew Walker
  *
  */
 public class Management extends Fulltime {
@@ -19,7 +20,8 @@ public class Management extends Fulltime {
 
 
     /**
-     * This constructor takes a profile, salary, and role to create a mananging employee object with the corresponding information. 
+     * This constructor takes a profile, salary, and role to create a mananging
+     * employee object with the corresponding information.
      * @param profile a reference to a profile instance
      * @param salary the designated salary of the referenced employee
      * @param role an integer referencing one of the 3 management roles
@@ -29,8 +31,10 @@ public class Management extends Fulltime {
         this.role = role;
         calculateBonus();
     }
+
     /**
-     * This method uses the role number to calculate the additional bonus money given to the employee each payment period
+     * This method uses the role number to calculate the additional bonus
+     * money given to the employee each payment period
      */
     public void calculateBonus() {
         switch (role) {
@@ -80,6 +84,7 @@ public class Management extends Fulltime {
         }
         return message;
     }
+
     /**
      * Checks if two instances of an object in Management are equivalent
      * @param obj any java object

@@ -1,12 +1,13 @@
 import java.util.Calendar;
 import java.util.StringTokenizer;
+
 /**
  * Represents a calendar date and its properties.
  * Provides parameterized constructor to create specific dates, and a default 
  * constructor creating a Date object with representing today's date.
  * Provides accessor methods: getDay, getMonth, getYear
  * Provides client methods: isValid, isLeapYear, toString
- * @author Ashley Stankovits, Philip SeveriNOV
+ * @author Ashley Stankovits, Matthew Walker
  */
 public class Date implements Comparable<Date>
 { 
@@ -286,6 +287,7 @@ public class Date implements Comparable<Date>
 		}
 		return true;
 	}
+
 	/** 
 	 * This method will return a referenced date in string format.
 	 * @return the referenced date in mm/dd/yyyy format

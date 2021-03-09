@@ -3,7 +3,7 @@
  * Provides default constructor for creating instances
  * Provides client methods: toString, equals, calculatePayment, addBonus
  * Provides accessor methods: getSalary
- * @author Ashley Stankovits, Philip Severinov
+ * @author Ashley Stankovits, Matthew Walker
  *
  */
 public class Fulltime extends Employee
@@ -20,6 +20,7 @@ public class Fulltime extends Employee
     	super(profile);
     	this.salary = salary;
     }
+
     /**
      * This method retrieves the salary of a fulltime employee.
      * @return the salary corresponding to a specific employee
@@ -27,6 +28,7 @@ public class Fulltime extends Employee
     public float getSalary(){
         return this.salary;
     }
+
     /**
      * This method will call to have the bonus of a management employee's salary added onto their payment
      */

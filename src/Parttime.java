@@ -1,9 +1,10 @@
 /**
- * Container class that defines the data type Parttime to hold the parttime employee information.
+ * Container class that defines the data type Parttime to hold the
+ * parttime employee information.
  * Provides default constructor for creating instances
  * Provides client methods: toString, equals, setHours, setRate, calculatePayment
  * Provides accessor methods: getRate, getHours
- * @author Ashley Stankovits, Philip Severinov
+ * @author Ashley Stankovits, Matthew Walker
  *
  */
 public class Parttime extends Employee {
@@ -14,7 +15,8 @@ public class Parttime extends Employee {
     private static final float OVERTIME_PAY = (float) 1.5;
 
     /**
-     * This constructor takes a profile and rate and creates a parttime employee object with the corresponding information. 
+     * This constructor takes a profile and rate and creates a parttime employee
+     * object with the corresponding information.
      * @param profile a reference to a profile instance
      * @param rate which is the hourly rate of the referenced employee
      */
@@ -23,10 +25,18 @@ public class Parttime extends Employee {
         this.rate = rate;
     }
 
+    /**
+     * This constructor takes a profile and hours and creates a parttime employee
+     * object with the corresponding information.
+     * @param profile a reference to a profile instance
+     * @param hour which is the number of working hours
+     *            of the referenced employee
+     */
     public Parttime(Profile profile, int hour) {
         super(profile);
         this.hours = hour;
     }
+
     /**
      * This is a constructor that takes the reference to a profile and attaches it to a parttime employee.
      * @param profile a reference to a profile instance
@@ -73,7 +83,8 @@ public class Parttime extends Employee {
      */
     @Override
     public String toString() {
-        String message = String.format("%s::PART TIME::Hourly Rate $%,.2f::Hours worked this period: %d", super.toString(), rate, (int) hours);
+        String message = String.format("%s::PART TIME::Hourly Rate $%,.2f::Hours worked this period: %d",
+                                                            super.toString(), rate, (int) hours);
         return message;
     }
 
@@ -86,7 +97,6 @@ public class Parttime extends Employee {
     public boolean equals(Object obj) {
         if (obj instanceof Parttime) {
             return (super.equals(obj));
-            //return (this.rate==employee.getRate()&&this.hours==employee.getHours());
         }
         return false;
     }
@@ -98,7 +108,8 @@ public class Parttime extends Employee {
     public void calculatePayment() {
         float tempPay;
         if (hours > WORK_WEEK_HOURS) {
-            tempPay = (float)(((hours - WORK_WEEK_HOURS) * rate * OVERTIME_PAY) + (WORK_WEEK_HOURS * rate));
+            tempPay = (float)(((hours - WORK_WEEK_HOURS) * rate * OVERTIME_PAY) +
+                                            (WORK_WEEK_HOURS * rate));
         } else {
             tempPay = (float)(hours * rate);
         }

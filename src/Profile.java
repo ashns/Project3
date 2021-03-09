@@ -1,9 +1,10 @@
 /**
- * Container class that defines the abstract data type Profile to hold the employee profiles and their various operations.
+ * Container class that defines the abstract data type Profile to hold
+ * the employee profiles and their various operations.
  * Provides default constructor for creating instances
  * Provides client methods: toString, equals
  * Provides accessor methods: getName, getDepartment, getDateHired
- * @author Ashley Stankovits, Philip Severinov
+ * @author Ashley Stankovits, Matthew Walker
  *
  */
 public class Profile {
@@ -54,21 +55,24 @@ public class Profile {
         return false;
     }
 
-    /**Retrieves name of employee.
+    /**
+     * Retrieves name of employee.
      * @return The calling profile's name of employee
      */
     public String getName() {
         return this.name;
     }
 
-    /**Retrieves department of employee.
+    /**
+     * Retrieves department of employee.
      * @return The calling profile's department of employee
      */
     public String getDepartment() {
         return this.department;
     }
 
-    /**Retrieves hiring date of employee.
+    /**
+     * Retrieves hiring date of employee.
      * @return The calling profile's hiring date of employee
      */
     public Date getDateHired() {

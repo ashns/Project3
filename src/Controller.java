@@ -7,7 +7,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-
+/**
+ * The controller class responds to all input from UI with appropriate
+ * calls to methods in other classes.
+ * Provides client methods: formatDate, add, remove, clear, setHours, importFile,
+ * exportFile, disableFields, readProfile, process
+ * Provides accessor methods: getEnteredProfile, getManagementPosition
+ * Provides print methods: printDatabase
+ * @author Ashley Stankovits, Matthew Walker
+ *
+ */
 public class Controller {
     @FXML
     TextArea display = new TextArea();
@@ -73,9 +82,17 @@ public class Controller {
     Button hourBtn = new Button();
 
     final int MAX_HOURS = 100;
-
     Company com = new Company();
 
+    /**
+     * This is a helper method to fix a date formatting issue with the UI.
+     * The date selector returns the date in localdate format which includes
+     * "-"s rather than "/"s. This method fixes the string to return in the
+     * format which includes "/"s.
+     *
+     * @return a String reformatting the inputted date into the date
+     * formatted to create a date object from date.class
+     */
     public String formatDate() {
         final int MONTH_INDEX = 0;
         final int DAY_INDEX = 1;
@@ -83,7 +100,6 @@ public class Controller {
 
         String tempDate = "";
         String[] tokens;
-
 
             tokens = dateBox.getValue().toString().split("-");
             tempDate += Integer.parseInt(tokens[MONTH_INDEX]) + "/";
@@ -93,6 +109,12 @@ public class Controller {
         return tempDate;
     }
 
+    /**
+     * This is a helper method to create a profile corresponding to the
+     * information inputted into the UI.
+     *
+     * @return a Profile object with the specified information
+     */
     public Profile getEnteredProfile() {
         String name = nameBox.getText();
         if(name.equals(""))
@@ -115,14 +137,18 @@ public class Controller {
         Profile empProfile = null;
         if(hireDate != null)
             empProfile = new Profile(name, department, hireDate);
-
-            //display.setText("Please select a valid date.");
-
         return empProfile;
     }
 
+    /**
+     * This method takes the input from the UI text fields and adds the
+     * specified employee to the company array.
+     *
+     * @param actionEvent which is the export button being triggered
+     */
     public void add(ActionEvent actionEvent) {
         Float rate = null;
+
         try {
             rate = Float.parseFloat(payBox.getText());
         } catch (NumberFormatException e) {
@@ -157,6 +183,12 @@ public class Controller {
         }
     }
 
+    /**
+     * This is a helper method to return the number corresponding with the manager
+     * position of the employee based on which radiobutton is clicked.
+     *
+     * @return an integer specifying the employees management position
+     */
     public int getManagementPosition() {
         final int manager = 1;
         final int departmentHead = 2;
@@ -170,6 +202,12 @@ public class Controller {
         }
     }
 
+    /**
+     * This method takes input from the UI to then remove the
+     * specified employee from the database.
+     *
+     * @param actionEvent which is the export button being triggered
+     */
     public void remove(ActionEvent actionEvent) {
         Float rate = null;
         try {
@@ -205,6 +243,12 @@ public class Controller {
         }
     }
 
+    /**
+     * This method clears all the text fields in the UI when the clear
+     * button is clicked.
+     *
+     * @param actionEvent which is the export button being triggered
+     */
     public void clear(ActionEvent actionEvent) {
         nameBox.clear();
         payBox.clear();
@@ -213,6 +257,12 @@ public class Controller {
         display.setText("Prompts cleared.");
     }
 
+    /**
+     * This method responds to the Set Hours button being pressed by
+     * setting the hours of a specific Parttime employee.
+     *
+     * @param actionEvent which is the Set Hours button being triggered
+     */
     public void setHours(ActionEvent actionEvent) {
         Integer hours = null;
 
@@ -237,6 +287,13 @@ public class Controller {
         }
     }
 
+    /**
+     * This method opens the open file dialogue on your computer
+     * and allows you to import a file which will then add any
+     * employees from the file to the current company array.
+     *
+     * @param actionEvent which is the export button being triggered
+     */
     public void importFile(ActionEvent actionEvent) throws FileNotFoundException {
         File file = databaseFile.showOpenDialog(null);
         if(file != null) {
@@ -282,7 +339,14 @@ public class Controller {
             display.setText("Import canceled.");
     }
 
-
+    /**
+     * This method opens the save dialogue on your computer
+     * and allows you to either create or override a file with
+     * the new database. It calls to exportDatabase in the company
+     * class.
+     *
+     * @param actionEvent which is the export button being triggered
+     */
     public void exportFile(ActionEvent actionEvent) throws IOException {
         File file = databaseFile.showSaveDialog(null);
         if(file != null) {
@@ -300,6 +364,13 @@ public class Controller {
             display.setText("Export canceled.");
     }
 
+    /**
+     * This method responds to the print buttons in the second tab
+     * being pressed by calling the appropriate print method from
+     * company class.
+     *
+     * @param actionEvent which is the print buttons being triggered
+     */
     public void printDatabase(ActionEvent actionEvent) {
         if (Print.getSelectedToggle() == printByDeptRB)
             display.setText(com.printByDepartment());
@@ -309,6 +380,13 @@ public class Controller {
             display.setText(com.print());
     }
 
+    /**
+     * This method disabled appropriate fields with the position radiobutton is selected.
+     * For example, with Fulltime selected, the hours text box, set hours button,
+     * and manager radiobuttons are disabled.
+     *
+     * @param actionEvent which is the radio buttons being triggered
+     */
     public void disableFields(ActionEvent actionEvent) {
         if (PTRB.isSelected()) {
             managerRB.setDisable(true);
@@ -344,8 +422,7 @@ public class Controller {
     }
 
     /**
-     * Helper method to clean up code. Checks for trailing tokens while parsing
-     * input and looks for invalid input.
+     * Helper method to clean up code. Created profile from file input for employees.
      *
      * @param array initialized array which contains employee information from file
      * @return profile object with input information
@@ -359,6 +436,11 @@ public class Controller {
         return new Profile(name, array[iDept], hireDate);
     }
 
+    /**
+     * This method processes payments from company when the appropriate button is pressed.
+     *
+     * @param e which is the button being pressed.
+     */
     public void process(ActionEvent e){
         com.processPayments();
         display.setText("Calculation of employee payments are done.");

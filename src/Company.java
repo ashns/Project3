@@ -1,5 +1,3 @@
-import javafx.event.ActionEvent;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,10 +5,11 @@ import java.io.PrintWriter;
 /**
  * Container class that defines the Company array to hold the employee information.
  * Provides default constructor for creating instances
- * Provides client methods: toString, equals, grow, add, remove, setHours, processPayments
+ * Provides client methods: toString, equals, grow, add, remove, setHours,
+ * processPayments, isEmpty, exportDatabase
  * Provides accessor methods: getNumEmployees
  * Provides print methods: genPrint, print, printByDate, printByDepartment
- * @author Ashley Stankovits, Philip Severinov
+ * @author Ashley Stankovits, Matthew Walker
  *
  */
 public class Company {
@@ -130,19 +129,6 @@ public class Company {
     private String genPrint() {
         String printout = "";
         for (int i = 0; i < this.numEmployee; i++) {
-            /*if (this.emplist[i] instanceof Parttime) {
-                Parttime temp = (Parttime) this.emplist[i];
-                System.out.println(temp.toString());
-            } else if (this.emplist[i] instanceof Fulltime) {
-                if (this.emplist[i] instanceof Management) {
-                    Management temp = (Management) this.emplist[i];
-                    System.out.println(temp.toString());
-                    continue;
-                }
-                Fulltime temp = (Fulltime) this.emplist[i];
-                System.out.println(temp.toString());
-            }
-             */
             printout += emplist[i].toString() + "\n";
         }
         return printout;
@@ -151,7 +137,6 @@ public class Company {
     /**
      * Adds formatting text lines to the printing of the employee array
      */
-
     public String print() {
         String output = isEmpty();
         if(output.equals("")) {
@@ -236,6 +221,10 @@ public class Company {
         return contents;
     }
 
+    /**
+     * This method checks if the employee database is empty.
+     * @return String which contains a specified message if the employee database is empty.
+     */
     public String isEmpty(){
         String output = "";
         if(numEmployee == 0)
@@ -243,6 +232,12 @@ public class Company {
         return output;
     }
 
+    /**
+     * This method takes a file and writes the employee database
+     * to it, which is then saved on the client computer.
+     * @param file which is the file the database is being written to
+     * @throws IOException if there is error in the PrintWriter
+     */
     public void exportDatabase(File file) throws IOException {
         try {
             PrintWriter writer;
