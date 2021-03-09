@@ -95,6 +95,8 @@ public class Controller {
 
     public Profile getEnteredProfile() {
         String name = nameBox.getText();
+        if(name.equals(""))
+            display.setText(display.getText() + "Please enter a name.\n");
         String department;
         if (CSRB.isSelected()) {
             department = "CS";
@@ -108,7 +110,7 @@ public class Controller {
         if(dateBox.getValue() != null)
             hireDate = new Date(formatDate());
         else
-            display.setText("Please enter a date.");
+            display.setText(display.getText() + "Please enter a date.\n");
 
         Profile empProfile = null;
         if(hireDate != null)
@@ -126,9 +128,9 @@ public class Controller {
         } catch (NumberFormatException e) {
             display.setText("Please enter a valid ");
             if (Position.getSelectedToggle() == PTRB)
-                display.setText(display.getText() + "Hourly Wage.\n");
+                display.setText(display.getText() + "hourly wage.\n");
             else
-                display.setText(display.getText() + "Annual Salary.\n");
+                display.setText(display.getText() + "annual salary.\n");
         }
 
         Profile hireProfile = getEnteredProfile();
@@ -180,25 +182,26 @@ public class Controller {
                 display.setText(display.getText() + "Annual Salary.\n");
         }
         Profile empProfile = getEnteredProfile();
-
-        if (Position.getSelectedToggle() == PTRB) {
-            Parttime oldHire = new Parttime(empProfile, rate);
-            if(com.remove(oldHire))
-                display.setText("Employee removed.");
-            else
-                display.setText("Employee does not exist.");
-        } else if (Position.getSelectedToggle() == FTRB) {
-            Fulltime oldHire = new Fulltime(empProfile, rate);
-            if(com.remove(oldHire))
-                display.setText("Employee removed.");
-            else
-                display.setText("Employee does not exist.");
-        } else {
-            Management oldHire = new Management(empProfile, rate, getManagementPosition());
-            if(com.remove(oldHire))
-                display.setText("Employee removed.");
-            else
-                display.setText("Employee does not exist.");
+        if (empProfile != null && rate != null) {
+            if (Position.getSelectedToggle() == PTRB) {
+                Parttime oldHire = new Parttime(empProfile, rate);
+                if (com.remove(oldHire))
+                    display.setText("Employee removed.");
+                else
+                    display.setText("Employee does not exist.");
+            } else if (Position.getSelectedToggle() == FTRB) {
+                Fulltime oldHire = new Fulltime(empProfile, rate);
+                if (com.remove(oldHire))
+                    display.setText("Employee removed.");
+                else
+                    display.setText("Employee does not exist.");
+            } else {
+                Management oldHire = new Management(empProfile, rate, getManagementPosition());
+                if (com.remove(oldHire))
+                    display.setText("Employee removed.");
+                else
+                    display.setText("Employee does not exist.");
+            }
         }
     }
 
