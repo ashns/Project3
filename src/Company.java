@@ -122,9 +122,10 @@ public class Company {
     /**
      * Prints all the employee objects in the employee array.
      */
-    private void genPrint() {
+    private String genPrint() {
+        String printout = "";
         for (int i = 0; i < this.numEmployee; i++) {
-            if (this.emplist[i] instanceof Parttime) {
+            /*if (this.emplist[i] instanceof Parttime) {
                 Parttime temp = (Parttime) this.emplist[i];
                 System.out.println(temp.toString());
             } else if (this.emplist[i] instanceof Fulltime) {
@@ -136,22 +137,26 @@ public class Company {
                 Fulltime temp = (Fulltime) this.emplist[i];
                 System.out.println(temp.toString());
             }
+             */
+            printout += emplist[i].toString() + "\n";
         }
+        return printout;
     }
 
     /**
      * Adds formatting text lines to the printing of the employee array
      */
-    public void print() {
-        System.out.println("--Printing earning statements for all employees--");
-        this.genPrint();
+    public String print() {
+        String output = "--Printing earning statements for all employees--\n";
+        output += this.genPrint();
+        return output;
     }
 
     /**
      * Prints all the objects in the employee array in order of department
      */
-    public void printByDepartment() {
-        System.out.println("--Printing earning statements by department--");
+    public String printByDepartment() {
+        String output = "--Printing earning statements by department--\n";
         for (int i = 0; i < numEmployee; i++) {
             Employee localMin = emplist[i];
             int iMin = i;
@@ -165,14 +170,15 @@ public class Company {
             emplist[i] = localMin;
             emplist[iMin] = temp;
         }
-        this.genPrint();
+        output += this.genPrint();
+        return output;
     }
 
     /**
      * Prints all the objects in the employee array in order of hiring date
      */
-    public void printByDate() {
-        System.out.println("--Printing earning statements by date hired--");
+    public String printByDate() {
+        String output = "--Printing earning statements by date hired--\n";
         for (int i = 0; i < numEmployee; i++) {
             Employee localMin = emplist[i];
             int iMin = i;
@@ -183,10 +189,10 @@ public class Company {
                 }
             }
             Employee temp = emplist[i];
-            emplist[i] = localMin;
             emplist[iMin] = temp;
         }
-        this.genPrint();
+        output += this.genPrint();
+        return output;
     }
 
     /**

@@ -205,9 +205,13 @@ public class Controller {
         Float hours = null;
         try{
             hours = Float.parseFloat(payBox.getText());
-            payBox.setText("Is Float: " + hours);
+            //payBox.setText("Is Float: " + hours);
         }catch (NumberFormatException e){
-            payBox.setText("Not Float!");
+            display.setText("Please enter a valid ");
+            if(Position.getSelectedToggle() == PTRB)
+                display.setText(display.getText() + "Hourly Wage.\n");
+            else
+                display.setText(display.getText() + "Annual Salary.\n");
         }
         Profile empProfile = getEnteredProfile();
         Parttime toUpdate = new Parttime(empProfile);
@@ -239,6 +243,11 @@ public class Controller {
     }
 
     public void printDatabase(ActionEvent actionEvent) {
-        com.print();
+        if(Print.getSelectedToggle() == printByDeptRB)
+            display.setText(com.printByDepartment());
+        else if(Print.getSelectedToggle() == printByDateRB)
+            com.printByDate();
+        else
+            display.setText(com.print());
     }
 }
