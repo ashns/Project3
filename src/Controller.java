@@ -80,7 +80,6 @@ public class Controller {
     Label positionLabel = new Label();
     @FXML
     Button hourBtn = new Button();
-
     final int MAX_HOURS = 100;
     Company com = new Company();
 

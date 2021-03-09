@@ -155,9 +155,7 @@ public class Company {
         String output = isEmpty();
         if(output.equals("")) {
             output = "--Printing earning statements by department--\n";
-
             Employee temp;
-
             for (int i = 0; i < numEmployee; i++) {
                 for (int j = 0; j < numEmployee-1; j++) {
                     if (emplist[j].getDepartment().compareTo(emplist[j+1].getDepartment()) > 0) {
