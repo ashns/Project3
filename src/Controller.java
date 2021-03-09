@@ -84,12 +84,12 @@ public class Controller {
         String tempDate = "";
         String[] tokens;
 
-        if(dateBox.getValue() != null) {
+
             tokens = dateBox.getValue().toString().split("-");
             tempDate += Integer.parseInt(tokens[MONTH_INDEX]) + "/";
             tempDate += Integer.parseInt(tokens[DAY_INDEX]) + "/";
             tempDate += Integer.parseInt(tokens[YEAR_INDEX]);
-        }
+
         return tempDate;
     }
 
@@ -103,9 +103,15 @@ public class Controller {
         } else {
             department = "IT";
         }
-        Date hireDate = new Date(formatDate());
+        Date hireDate = null;
+
+        if(dateBox.getValue() != null)
+            hireDate = new Date(formatDate());
+        else
+            display.setText("Please enter a date.");
+
         Profile empProfile = null;
-        
+        if(hireDate != null)
             empProfile = new Profile(name, department, hireDate);
 
             //display.setText("Please select a valid date.");
@@ -118,7 +124,7 @@ public class Controller {
         try {
             rate = Float.parseFloat(payBox.getText());
         } catch (NumberFormatException e) {
-            display.setText("Please enter a valid rate.");
+            display.setText("Please enter a valid ");
             if (Position.getSelectedToggle() == PTRB)
                 display.setText(display.getText() + "Hourly Wage.\n");
             else
@@ -126,7 +132,7 @@ public class Controller {
         }
 
         Profile hireProfile = getEnteredProfile();
-        if (hireProfile != null) {
+        if (hireProfile != null && rate != null) {
             if (PTRB.isSelected()) {
                 Parttime newHire = new Parttime(hireProfile, rate);
                 if (com.add(newHire))
