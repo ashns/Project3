@@ -69,6 +69,8 @@ public class Controller {
     RadioButton managerRB = new RadioButton();
     @FXML
     RadioButton DepartmentRB = new RadioButton();
+    @FXML
+    RadioButton DirectorRB = new RadioButton();
 
     StringTokenizer parse;
 
@@ -130,7 +132,7 @@ public class Controller {
     }
     public Profile getEnteredProfile() {
         String name = nameBox.getText();
-        String department = null;
+        String department;
         if(CSRB.isSelected()){
             department = "CS";
         }
@@ -266,7 +268,7 @@ public class Controller {
         if(Print.getSelectedToggle() == printByDeptRB)
             display.setText(com.printByDepartment());
         else if(Print.getSelectedToggle() == printByDateRB)
-            com.printByDate();
+            display.setText(com.printByDate());
         else
             display.setText(com.print());
     }
@@ -275,16 +277,20 @@ public class Controller {
         if(PTRB.isSelected()){
             managerRB.setDisable(true);
             DepartmentRB.setDisable(true);
-            FTRB.setDisable(true);
+            DirectorRB.setDisable(true);
+            hourBox.setDisable(false);
         }
         else if(FTRB.isSelected()){
             managerRB.setDisable(true);
             DepartmentRB.setDisable(true);
-            PTRB.setDisable(true);
+            DirectorRB.setDisable(true);
+            hourBox.setDisable(true);
         }
-        else{
-            PTRB.setDisable(true);
-            FTRB.setDisable(true);
+        else if(MGRB.isSelected()){
+            managerRB.setDisable(false);
+            DepartmentRB.setDisable(false);
+            DirectorRB.setDisable(false);
+            hourBox.setDisable(true);
         }
     }
 }
