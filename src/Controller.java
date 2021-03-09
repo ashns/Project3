@@ -233,20 +233,26 @@ public class Controller {
     }
 
     public void setHours(ActionEvent actionEvent) {
-        Float hours = null;
+        int hours = 0;
         try {
-            hours = Float.parseFloat(payBox.getText());
+            hours = Integer.parseInt(hourBox.getText());
+
             //payBox.setText("Is Float: " + hours);
         } catch (NumberFormatException e) {
-            display.setText("Please enter a valid ");
-            if (Position.getSelectedToggle() == PTRB)
-                display.setText(display.getText() + "Hourly Wage.\n");
-            else
-                display.setText(display.getText() + "Annual Salary.\n");
+            display.setText("Please enter a valid time");
         }
-        Profile empProfile = getEnteredProfile();
-        Parttime toUpdate = new Parttime(empProfile);
-        toUpdate.setHours(hours);
+        if(hours < 0)
+            display.setText("Hours cannot be negative.");
+        else if(hours > 100)
+            display.setText("Invalid hours: over 100");
+        else {
+            Profile empProfile = getEnteredProfile();
+            Parttime toUpdate = new Parttime(empProfile, hours);
+            if (com.setHours(toUpdate))
+                display.setText("Working hours set.");
+            else
+                display.setText("Unable to update hours.");
+        }
     }
 
     public void importFile(ActionEvent actionEvent) throws FileNotFoundException {
