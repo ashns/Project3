@@ -147,8 +147,12 @@ public class Company {
      */
 
     public String print() {
-        String output = "--Printing earning statements for all employees--\n";
-        output += this.genPrint();
+        String output = isEmpty();
+        if(output.equals("")) {
+            output = "--Printing earning statements for all employees--\n";
+
+            output += this.genPrint();
+        }
         return output;
 
     }
@@ -157,21 +161,25 @@ public class Company {
      * Prints all the objects in the employee array in order of department
      */
     public String printByDepartment() {
-        String output = "--Printing earning statements by department--\n";
-        for (int i = 0; i < numEmployee; i++) {
-            Employee localMin = emplist[i];
-            int iMin = i;
-            for (int j = i + 1; j < numEmployee; j++) {
-                if (emplist[j].getDepartment().compareTo(localMin.getDepartment()) < 0) {
-                    localMin = emplist[j];
-                    iMin = j;
+        String output = isEmpty();
+        if(output.equals("")) {
+            output = "--Printing earning statements by department--\n";
+
+            for (int i = 0; i < numEmployee; i++) {
+                Employee localMin = emplist[i];
+                int iMin = i;
+                for (int j = i + 1; j < numEmployee; j++) {
+                    if (emplist[j].getDepartment().compareTo(localMin.getDepartment()) < 0) {
+                        localMin = emplist[j];
+                        iMin = j;
+                    }
                 }
+                Employee temp = emplist[i];
+                emplist[i] = localMin;
+                emplist[iMin] = temp;
             }
-            Employee temp = emplist[i];
-            emplist[i] = localMin;
-            emplist[iMin] = temp;
+            output += this.genPrint();
         }
-        output += this.genPrint();
         return output;
 
     }
@@ -180,21 +188,23 @@ public class Company {
      * Prints all the objects in the employee array in order of hiring date
      */
     public String printByDate() {
-        String output = "--Printing earning statements by date hired--\n";
-        for (int i = 0; i < numEmployee; i++) {
-            Employee localMin = emplist[i];
-            int iMin = i;
-            for (int j = i + 1; j < numEmployee; j++) {
-                if (emplist[j].getDateHired().compareTo(localMin.getDateHired()) < 0) {
-                    localMin = emplist[j];
-                    iMin = j;
+        String output = isEmpty();
+        if(output.equals("")) {
+            output = "--Printing earning statements by date hired--\n";
+            for (int i = 0; i < numEmployee; i++) {
+                Employee localMin = emplist[i];
+                int iMin = i;
+                for (int j = i + 1; j < numEmployee; j++) {
+                    if (emplist[j].getDateHired().compareTo(localMin.getDateHired()) < 0) {
+                        localMin = emplist[j];
+                        iMin = j;
+                    }
                 }
+                Employee temp = emplist[i];
+                emplist[iMin] = temp;
             }
-            Employee temp = emplist[i];
-            emplist[iMin] = temp;
+            output += this.genPrint();
         }
-
-        output += this.genPrint();
         return output;
 
     }
@@ -219,5 +229,12 @@ public class Company {
             }
         }
         return contents;
+    }
+
+    public String isEmpty(){
+        String output = "";
+        if(numEmployee == 0)
+            output = "Employee database is empty.\n";
+        return output;
     }
 }
