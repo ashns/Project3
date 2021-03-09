@@ -159,13 +159,13 @@ public class Company {
             Employee temp;
 
             for (int i = 0; i < numEmployee; i++) {
-                for (int j = i + 1; j < numEmployee-1; j++) {
+                for (int j = 0; j < numEmployee-1; j++) {
                     if (emplist[j].getDepartment().compareTo(emplist[j+1].getDepartment()) > 0) {
                         temp = emplist[j];
                         emplist[j] = emplist[j+1];
                         emplist[j+1] = temp;
                     }
-                    
+
                 }
             }
             output += this.genPrint();
@@ -181,17 +181,15 @@ public class Company {
         String output = isEmpty();
         if(output.equals("")) {
             output = "--Printing earning statements by date hired--\n";
+            Employee temp;
             for (int i = 0; i < numEmployee; i++) {
-                Employee localMin = emplist[i];
-                int iMin = i;
-                for (int j = i + 1; j < numEmployee; j++) {
-                    if (emplist[j].getDateHired().compareTo(localMin.getDateHired()) < 0) {
-                        localMin = emplist[j];
-                        iMin = j;
+                for (int j = 0; j < numEmployee-1; j++) {
+                    if (emplist[j].getDateHired().compareTo(emplist[j+1].getDateHired()) > 0) {
+                        temp = emplist[j];
+                        emplist[j] = emplist[j+1];
+                        emplist[j+1] = temp;
                     }
                 }
-                Employee temp = emplist[i];
-                emplist[iMin] = temp;
             }
             output += this.genPrint();
         }
