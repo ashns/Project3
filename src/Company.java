@@ -146,10 +146,12 @@ public class Company {
     /**
      * Adds formatting text lines to the printing of the employee array
      */
+
     public String print() {
         String output = "--Printing earning statements for all employees--\n";
         output += this.genPrint();
         return output;
+
     }
 
     /**
@@ -172,6 +174,7 @@ public class Company {
         }
         output += this.genPrint();
         return output;
+
     }
 
     /**
@@ -191,8 +194,10 @@ public class Company {
             Employee temp = emplist[i];
             emplist[iMin] = temp;
         }
+
         output += this.genPrint();
         return output;
+
     }
 
     /**
@@ -203,15 +208,15 @@ public class Company {
         for (int i = 0; i < this.numEmployee; i++) {
             if (this.emplist[i] instanceof Parttime) {
                 Parttime temp = (Parttime) this.emplist[i];
-                contents+=temp.toString();
+                contents+=temp.toString() + "\n";
             } else if (this.emplist[i] instanceof Fulltime) {
                 if (this.emplist[i] instanceof Management) {
                     Management temp = (Management) this.emplist[i];
-                    contents+=(temp.toString());
+                    contents+=(temp.toString() + "\n");
                     continue;
                 }
                 Fulltime temp = (Fulltime) this.emplist[i];
-                contents+=(temp.toString());
+                contents+=(temp.toString() + "\n");
             }
         }
         return contents;

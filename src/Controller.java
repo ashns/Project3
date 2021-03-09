@@ -1,7 +1,10 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -62,6 +65,10 @@ public class Controller {
     RadioButton ECERB = new RadioButton();
     @FXML
     RadioButton ITRB = new RadioButton();
+    @FXML
+    RadioButton managerRB = new RadioButton();
+    @FXML
+    RadioButton DepartmentRB = new RadioButton();
 
     StringTokenizer parse;
 
@@ -102,11 +109,13 @@ public class Controller {
     public void rateChange(ActionEvent actionEvent) {
         payLabel.setText("Hourly Rate: $");
         rateLabel.setText("/ hour");
+
     }
 
     public void salaryChange(ActionEvent actionEvent) {
         payLabel.setText("Annual Salary: $");
         rateLabel.setText("/ year");
+
     }
     public String formatDate(){
         final int MONTH_INDEX = 1;
@@ -121,7 +130,16 @@ public class Controller {
     }
     public Profile getEnteredProfile() {
         String name = nameBox.getText();
-        String department = Dept.getSelectedToggle().toString();
+        String department = null;
+        if(CSRB.isSelected()){
+            department = "CS";
+        }
+        else if(ECERB.isSelected()){
+            department = "ECE";
+        }
+        else{
+            department = "IT";
+        }
         Date hireDate = new Date(formatDate());
         Profile empProfile = new Profile(name, department, hireDate);
         return empProfile;
@@ -141,13 +159,13 @@ public class Controller {
         }
         Profile hireProfile = getEnteredProfile();
 
-        if (Position.getSelectedToggle() == PTRB) {
+        if (PTRB.isSelected()) {
             Parttime newHire = new Parttime(hireProfile, rate);
             com.add(newHire);
-        } else if (Position.getSelectedToggle() == FTRB) {
+        } else if (FTRB.isSelected()) {
             Fulltime newHire = new Fulltime(hireProfile, rate);
             com.add(newHire);
-        } else if (Position.getSelectedToggle() == MGRB){
+        } else if (MGRB.isSelected()){
             Management newHire = new Management(hireProfile, rate, getManagementPosition());
             com.add(newHire);
         }
@@ -157,10 +175,10 @@ public class Controller {
         final int manager = 1;
         final int departmentHead = 2;
         final int districtHead = 3;
-        if(Management.getSelectedToggle().toString()=="managerRB"){
+        if(managerRB.isSelected()){
             return manager;
         }
-        else if(Management.getSelectedToggle().toString()=="DepartmentRB"){
+        else if(DepartmentRB.isSelected()){
             return departmentHead;
         }
         else{
@@ -219,7 +237,9 @@ public class Controller {
     }
 
     public void importFile(ActionEvent actionEvent) throws FileNotFoundException {
-
+       // Node node = (Node) actionEvent.getSource();
+       // Window window = node.getScene().getWindow();
+       // databaseFile.setTitle("Open Database File");
         File file = databaseFile.showOpenDialog(null);
         Scanner myReader = new Scanner(file);
         while (myReader.hasNextLine()) {
@@ -249,5 +269,22 @@ public class Controller {
             com.printByDate();
         else
             display.setText(com.print());
+    }
+
+    public void disableFields(ActionEvent actionEvent) {
+        if(PTRB.isSelected()){
+            managerRB.setDisable(true);
+            DepartmentRB.setDisable(true);
+            FTRB.setDisable(true);
+        }
+        else if(FTRB.isSelected()){
+            managerRB.setDisable(true);
+            DepartmentRB.setDisable(true);
+            PTRB.setDisable(true);
+        }
+        else{
+            PTRB.setDisable(true);
+            FTRB.setDisable(true);
+        }
     }
 }
