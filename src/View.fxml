@@ -27,7 +27,7 @@
                            <children>
                               <TextField fx:id="nameBox" layoutX="75.0" layoutY="14.0" prefHeight="25.0" prefWidth="265.0" />
                               <Label layoutX="40.0" layoutY="18.0" text="Name:" />
-                              <DatePicker fx:id="dateBox" editable="false" layoutX="412.0" layoutY="14.0" />
+                              <DatePicker fx:id="dateBox" editable="false" layoutX="412.0" layoutY="14.0" promptText="Select date ------&gt;" />
                               <Label layoutX="347.0" layoutY="18.0" text="Hire date:" />
                               <VBox layoutX="14.0" layoutY="53.0" prefHeight="91.0" prefWidth="100.0" spacing="5.0">
                                  <children>
