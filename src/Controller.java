@@ -229,7 +229,7 @@ public class Controller {
         while (fileReader.hasNext()) {
             Scanner scLine = new Scanner(file);
             String currentLine = fileReader.nextLine();
-            String[] arrayOfInput = currentLine.split(",", 5);
+            String[] arrayOfInput = currentLine.split(",", 6);
             String firstToken = arrayOfInput[0];
             System.out.println(firstToken);
             if (firstToken.equals("P")) {
@@ -265,6 +265,7 @@ public class Controller {
             }
 
             if (firstToken.equals("M")) {
+                System.out.println("inside manager");
                 Profile hireProfile = readProfile(arrayOfInput);
                 float salary = Float.parseFloat(arrayOfInput[4]);
                 int code = Integer.parseInt(arrayOfInput[5]);
