@@ -176,6 +176,7 @@ public class Company {
 
     /**
      * Prints all the objects in the employee array in order of hiring date
+     * @return A string with all employees as they would be displayed
      */
     public String printByDate() {
         String output = isEmpty();

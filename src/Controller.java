@@ -117,8 +117,12 @@ public class Controller {
      */
     public Profile getEnteredProfile() {
         String name = nameBox.getText();
-        if(name.equals(""))
+        if(nameBox.getText().equals("")) {
             display.setText(display.getText() + "Please enter a name.\n");
+            if(dateBox.getValue() == null)
+                display.setText(display.getText() + "Please enter a date.\n");
+            return null;
+        }
         String department;
         if (CSRB.isSelected()) {
             department = "CS";
