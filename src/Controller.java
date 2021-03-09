@@ -177,9 +177,9 @@ public class Controller {
         } catch (NumberFormatException e) {
             display.setText("Please enter a valid ");
             if (Position.getSelectedToggle() == PTRB)
-                display.setText(display.getText() + "Hourly Wage.\n");
+                display.setText(display.getText() + "hourly wage.\n");
             else
-                display.setText(display.getText() + "Annual Salary.\n");
+                display.setText(display.getText() + "annual salary.\n");
         }
         Profile empProfile = getEnteredProfile();
         if (empProfile != null && rate != null) {

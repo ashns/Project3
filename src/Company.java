@@ -171,18 +171,17 @@ public class Company {
         if(output.equals("")) {
             output = "--Printing earning statements by department--\n";
 
+            Employee temp;
+
             for (int i = 0; i < numEmployee; i++) {
-                Employee localMin = emplist[i];
-                int iMin = i;
-                for (int j = i + 1; j < numEmployee; j++) {
-                    if (emplist[j].getDepartment().compareTo(localMin.getDepartment()) < 0) {
-                        localMin = emplist[j];
-                        iMin = j;
+                for (int j = i + 1; j < numEmployee-1; j++) {
+                    if (emplist[j].getDepartment().compareTo(emplist[j+1].getDepartment()) > 0) {
+                        temp = emplist[j];
+                        emplist[j] = emplist[j+1];
+                        emplist[j+1] = temp;
                     }
+                    
                 }
-                Employee temp = emplist[i];
-                emplist[i] = localMin;
-                emplist[iMin] = temp;
             }
             output += this.genPrint();
         }
