@@ -22,6 +22,11 @@ public class Parttime extends Employee {
         super(profile);
         this.rate = rate;
     }
+
+    public Parttime(Profile profile, int hour) {
+        super(profile);
+        this.hours = hour;
+    }
     /**
      * This is a constructor that takes the reference to a profile and attaches it to a parttime employee.
      * @param profile a reference to a profile instance

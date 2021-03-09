@@ -99,11 +99,10 @@ public class Company {
         if (!(employee instanceof Parttime)) {
             return false;
         }
-        int i;
-        if ((i = this.find(employee)) != ERRNO) {
+        int i = this.find(employee);
+        if (i != ERRNO){
             if (this.emplist[i] instanceof Parttime) {
-                Parttime partTimeEmployee = (Parttime) this.emplist[i];
-                partTimeEmployee.setHours(((Parttime) employee).getHours());
+                ((Parttime)emplist[i]).setHours(((Parttime)employee).getHours());
                 return true;
             }
         }

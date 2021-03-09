@@ -76,46 +76,14 @@ public class Controller {
     @FXML
     Label positionLabel = new Label();
 
-    StringTokenizer parse;
+
     final int NUM_TOKENS_PROFILE = 3;
     Company com = new Company();
 
-    public void dataTest(ActionEvent actionEvent) {
-        String last = "", first = "";
-        char middle = ' ';
-        parse = new StringTokenizer(nameBox.getText());
-        switch (parse.countTokens()) {
-            case 1:
-                last = parse.nextToken();
-                break;
-            case 2:
-                first = parse.nextToken();
-                last = parse.nextToken();
-                break;
-            case 3:
-                first = parse.nextToken();
-                middle = parse.nextToken().charAt(0);
-                last = parse.nextToken();
-                break;
-            default:
-                display.setText("Please enter a valid name.");
-                break;
-        }
-
-        if (first != "")
-            last += ", " + first;
-
-        if (middle != ' ')
-            last += " " + middle + ".";
-
-        if (last != "")
-            display.setText("Recieved name: " + last + "\n");
-    }
-
     public String formatDate() {
-        final int MONTH_INDEX = 1;
-        final int DAY_INDEX = 2;
-        final int YEAR_INDEX = 0;
+        final int MONTH_INDEX = 0;
+        final int DAY_INDEX = 1;
+        final int YEAR_INDEX = 2;
         String[] tokens = dateBox.getValue().toString().split("-");
         String tempDate = "";
         tempDate += Integer.parseInt(tokens[MONTH_INDEX]) + "/";
@@ -205,12 +173,22 @@ public class Controller {
 
         if (Position.getSelectedToggle() == PTRB) {
             Parttime oldHire = new Parttime(empProfile, rate);
-            com.remove(oldHire);
+            if(com.remove(oldHire))
+                display.setText("Employee removed.");
+            else
+                display.setText("Employee does not exist.");
         } else if (Position.getSelectedToggle() == FTRB) {
             Fulltime oldHire = new Fulltime(empProfile, rate);
-            com.remove(oldHire);
+            if(com.remove(oldHire))
+                display.setText("Employee removed.");
+            else
+                display.setText("Employee does not exist.");
         } else {
             Management oldHire = new Management(empProfile, rate, getManagementPosition());
+            if(com.remove(oldHire))
+                display.setText("Employee removed.");
+            else
+                display.setText("Employee does not exist.");
         }
     }
 
@@ -223,20 +201,26 @@ public class Controller {
     }
 
     public void setHours(ActionEvent actionEvent) {
-        Float hours = null;
+        int hours = 0;
         try {
-            hours = Float.parseFloat(payBox.getText());
+            hours = Integer.parseInt(hourBox.getText());
+
             //payBox.setText("Is Float: " + hours);
         } catch (NumberFormatException e) {
-            display.setText("Please enter a valid ");
-            if (Position.getSelectedToggle() == PTRB)
-                display.setText(display.getText() + "Hourly Wage.\n");
-            else
-                display.setText(display.getText() + "Annual Salary.\n");
+            display.setText("Please enter a valid time");
         }
-        Profile empProfile = getEnteredProfile();
-        Parttime toUpdate = new Parttime(empProfile);
-        toUpdate.setHours(hours);
+        if(hours < 0)
+            display.setText("Hours cannot be negative.");
+        else if(hours > 100)
+            display.setText("Invalid hours: over 100");
+        else {
+            Profile empProfile = getEnteredProfile();
+            Parttime toUpdate = new Parttime(empProfile, hours);
+            if (com.setHours(toUpdate))
+                display.setText("Working hours set.");
+            else
+                display.setText("Unable to update hours.");
+        }
     }
 
     public void importFile(ActionEvent actionEvent) throws FileNotFoundException {
@@ -372,6 +356,11 @@ public class Controller {
         String name = array[iLastName] + "," + array[iFirstName];
         Date hireDate = new Date(array[iDate]);
         return new Profile(name, array[iDept], hireDate);
+    }
+
+    public void process(ActionEvent e){
+        com.processPayments();
+        display.setText("Calculation of employee payments are done.");
     }
 
 }
