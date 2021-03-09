@@ -175,7 +175,7 @@ public class Controller {
         try {
             rate = Float.parseFloat(payBox.getText());
         } catch (NumberFormatException e) {
-            display.setText("Please enter a valid rate.");
+            display.setText("Please enter a valid ");
             if (Position.getSelectedToggle() == PTRB)
                 display.setText(display.getText() + "Hourly Wage.\n");
             else
@@ -239,57 +239,65 @@ public class Controller {
 
     public void importFile(ActionEvent actionEvent) throws FileNotFoundException {
         File file = databaseFile.showOpenDialog(null);
-        Scanner fileReader = new Scanner(file);
+        if(file != null) {
+            Scanner fileReader = new Scanner(file);
 
-        while (fileReader.hasNext()) {
-            Scanner scLine = new Scanner(file);
-            String currentLine = fileReader.nextLine();
-            String[] arrayOfInput = currentLine.split(",", 6);
-            String firstToken = arrayOfInput[0];
+            while (fileReader.hasNext()) {
+                Scanner scLine = new Scanner(file);
+                String currentLine = fileReader.nextLine();
+                String[] arrayOfInput = currentLine.split(",", 6);
+                String firstToken = arrayOfInput[0];
 
-            if (firstToken.equals("P")) {
-                Profile hireProfile = readProfile(arrayOfInput);
-                float rate = Float.parseFloat(arrayOfInput[4]);
+                if (firstToken.equals("P")) {
+                    Profile hireProfile = readProfile(arrayOfInput);
+                    float rate = Float.parseFloat(arrayOfInput[4]);
+                    scLine.close();
+                    Parttime newHire = new Parttime(hireProfile, rate);
+                    com.add(newHire);
+                    continue;
+                }
+                if (firstToken.equals("F")) {
+                    Profile hireProfile = readProfile(arrayOfInput);
+                    float salary = Float.parseFloat(arrayOfInput[4]);
+                    scLine.close();
+                    Fulltime newHire = new Fulltime(hireProfile, salary);
+                    com.add(newHire);
+                    continue;
+                }
+                if (firstToken.equals("M")) {
+                    Profile hireProfile = readProfile(arrayOfInput);
+                    float salary = Float.parseFloat(arrayOfInput[4]);
+                    int code = Integer.parseInt(arrayOfInput[5]);
+                    scLine.close();
+                    Management newHire = new Management(hireProfile, salary, code);
+                    com.add(newHire);
+                    continue;
+                }
                 scLine.close();
-                Parttime newHire = new Parttime(hireProfile, rate);
-                com.add(newHire);
-                continue;
             }
-            if (firstToken.equals("F")) {
-                Profile hireProfile = readProfile(arrayOfInput);
-                float salary = Float.parseFloat(arrayOfInput[4]);
-                scLine.close();
-                Fulltime newHire = new Fulltime(hireProfile, salary);
-                com.add(newHire);
-                continue;
-            }
-            if (firstToken.equals("M")) {
-                Profile hireProfile = readProfile(arrayOfInput);
-                float salary = Float.parseFloat(arrayOfInput[4]);
-                int code = Integer.parseInt(arrayOfInput[5]);
-                scLine.close();
-                Management newHire = new Management(hireProfile, salary, code);
-                com.add(newHire);
-                continue;
-            }
-            scLine.close();
+            fileReader.close();
+            display.setText("Employees from file have been added.");
         }
-        fileReader.close();
-        display.setText("Employees from file have been added.");
+        else
+            display.setText("Import canceled.");
     }
 
 
     public void exportFile(ActionEvent actionEvent) throws IOException {
         File file = databaseFile.showSaveDialog(null);
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
+        if(file != null) {
+            try {
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                com.exportDatabase(file);
+                display.setText("Database exported to selected file successfully.");
+            } catch (IOException ex) {
+                display.setText("Unable to export database.");
             }
-            com.exportDatabase(file);
-            display.setText("Database exported to selected file successfully.");
-        } catch (IOException ex) {
-
         }
+        else
+            display.setText("Export canceled.");
     }
 
     public void printDatabase(ActionEvent actionEvent) {
