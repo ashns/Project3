@@ -105,7 +105,11 @@ public class Controller {
             department = "IT";
         }
         Date hireDate = new Date(formatDate());
-        Profile empProfile = new Profile(name, department, hireDate);
+        Profile empProfile = null;
+        if(hireDate.isValid())
+            empProfile = new Profile(name, department, hireDate);
+        else
+            display.setText("Please select a valid date.");
         return empProfile;
     }
 
@@ -122,27 +126,27 @@ public class Controller {
                 display.setText(display.getText() + "Annual Salary.\n");
         }
         Profile hireProfile = getEnteredProfile();
+        if (hireProfile != null) {
 
-        if (PTRB.isSelected()) {
-            Parttime newHire = new Parttime(hireProfile, rate);
-            if(com.add(newHire))
-                display.setText("Employee added.");
-            else
-                display.setText("Employee is already in the list.");
-        }
-        else if (FTRB.isSelected()) {
-            Fulltime newHire = new Fulltime(hireProfile, rate);
-            if(com.add(newHire))
-                display.setText("Employee added.");
-            else
-                display.setText("Employee is already in the list.");
-        }
-        else if (MGRB.isSelected()) {
-            Management newHire = new Management(hireProfile, rate, getManagementPosition());
-            if(com.add(newHire))
-                display.setText("Employee added.");
-            else
-                display.setText("Employee is already in the list.");
+            if (PTRB.isSelected()) {
+                Parttime newHire = new Parttime(hireProfile, rate);
+                if (com.add(newHire))
+                    display.setText("Employee added.");
+                else
+                    display.setText("Employee is already in the list.");
+            } else if (FTRB.isSelected()) {
+                Fulltime newHire = new Fulltime(hireProfile, rate);
+                if (com.add(newHire))
+                    display.setText("Employee added.");
+                else
+                    display.setText("Employee is already in the list.");
+            } else if (MGRB.isSelected()) {
+                Management newHire = new Management(hireProfile, rate, getManagementPosition());
+                if (com.add(newHire))
+                    display.setText("Employee added.");
+                else
+                    display.setText("Employee is already in the list.");
+            }
         }
     }
 
