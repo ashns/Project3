@@ -78,6 +78,8 @@ public class Controller {
 
 
     final int NUM_TOKENS_PROFILE = 3;
+    final int MAX_HOURS = 100;
+
     Company com = new Company();
 
     public String formatDate() {
@@ -197,21 +199,23 @@ public class Controller {
         payBox.clear();
         hourBox.clear();
         dateBox.getEditor().clear();
-
+        display.setText("Prompts cleared.");
     }
 
     public void setHours(ActionEvent actionEvent) {
-        int hours = 0;
+        Integer hours = null;
         try {
             hours = Integer.parseInt(hourBox.getText());
 
             //payBox.setText("Is Float: " + hours);
         } catch (NumberFormatException e) {
-            display.setText("Please enter a valid time");
+            display.setText("Please enter a valid working hours.");
         }
-        if(hours < 0)
+        if (hours == null)
+            display.setText("Please enter working hours.");
+        else if(hours < 0)
             display.setText("Hours cannot be negative.");
-        else if(hours > 100)
+        else if(hours > MAX_HOURS)
             display.setText("Invalid hours: over 100");
         else {
             Profile empProfile = getEnteredProfile();
