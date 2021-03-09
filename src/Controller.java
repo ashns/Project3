@@ -108,17 +108,6 @@ public class Controller {
             display.setText("Recieved name: " + last + "\n");
     }
 
-    public void rateChange(ActionEvent actionEvent) {
-        payLabel.setText("Hourly Rate: $");
-        rateLabel.setText("/ hour");
-
-    }
-
-    public void salaryChange(ActionEvent actionEvent) {
-        payLabel.setText("Annual Salary: $");
-        rateLabel.setText("/ year");
-
-    }
     public String formatDate(){
         final int MONTH_INDEX = 1;
         final int DAY_INDEX = 2;
@@ -279,18 +268,24 @@ public class Controller {
             DepartmentRB.setDisable(true);
             DirectorRB.setDisable(true);
             hourBox.setDisable(false);
+            payLabel.setText("Hourly Rate: $");
+            rateLabel.setText("/ hour");
         }
         else if(FTRB.isSelected()){
             managerRB.setDisable(true);
             DepartmentRB.setDisable(true);
             DirectorRB.setDisable(true);
             hourBox.setDisable(true);
+            payLabel.setText("Annual Salary: $");
+            rateLabel.setText("/ year");
         }
         else if(MGRB.isSelected()){
             managerRB.setDisable(false);
             DepartmentRB.setDisable(false);
             DirectorRB.setDisable(false);
             hourBox.setDisable(true);
+            payLabel.setText("Annual Salary: $");
+            rateLabel.setText("/ year");
         }
     }
 }
