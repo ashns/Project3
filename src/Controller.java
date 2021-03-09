@@ -156,13 +156,22 @@ public class Controller {
 
         if (PTRB.isSelected()) {
             Parttime newHire = new Parttime(hireProfile, rate);
-            com.add(newHire);
+            if(com.add(newHire))
+                display.setText("Employee added.");
+            else
+                display.setText("Employee is already in the list.");
         } else if (FTRB.isSelected()) {
             Fulltime newHire = new Fulltime(hireProfile, rate);
-            com.add(newHire);
+            if(com.add(newHire))
+                display.setText("Employee added.");
+            else
+                display.setText("Employee is already in the list.");
         } else if (MGRB.isSelected()){
             Management newHire = new Management(hireProfile, rate, getManagementPosition());
-            com.add(newHire);
+            if(com.add(newHire))
+                display.setText("Employee added.");
+            else
+                display.setText("Employee is already in the list.");
         }
     }
 
