@@ -113,9 +113,9 @@ public class Controller {
     }
 
     public String formatDate() {
-        final int MONTH_INDEX = 1;
-        final int DAY_INDEX = 2;
-        final int YEAR_INDEX = 0;
+        final int MONTH_INDEX = 0;
+        final int DAY_INDEX = 1;
+        final int YEAR_INDEX = 2;
         String[] tokens = dateBox.getValue().toString().split("-");
         String tempDate = "";
         tempDate += Integer.parseInt(tokens[MONTH_INDEX]) + "/";
@@ -205,12 +205,22 @@ public class Controller {
 
         if (Position.getSelectedToggle() == PTRB) {
             Parttime oldHire = new Parttime(empProfile, rate);
-            com.remove(oldHire);
+            if(com.remove(oldHire))
+                display.setText("Employee removed.");
+            else
+                display.setText("Employee does not exist.");
         } else if (Position.getSelectedToggle() == FTRB) {
             Fulltime oldHire = new Fulltime(empProfile, rate);
-            com.remove(oldHire);
+            if(com.remove(oldHire))
+                display.setText("Employee removed.");
+            else
+                display.setText("Employee does not exist.");
         } else {
             Management oldHire = new Management(empProfile, rate, getManagementPosition());
+            if(com.remove(oldHire))
+                display.setText("Employee removed.");
+            else
+                display.setText("Employee does not exist.");
         }
     }
 
