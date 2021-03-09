@@ -96,7 +96,7 @@
                                  </children>
                               </HBox>
                               <Button fx:id="importBTN" layoutX="104.0" layoutY="54.0" mnemonicParsing="false" onAction="#importFile" text="Import Database" />
-                              <Button fx:id="exportBTN" layoutX="401.0" layoutY="54.0" mnemonicParsing="false" onAction="#exportDatabase" text="Export Database" />
+                              <Button fx:id="exportBTN" layoutX="401.0" layoutY="54.0" mnemonicParsing="false" onAction="#exportFile" text="Export Database" />
                               <Button fx:id="processBTN" layoutX="248.0" layoutY="97.0" mnemonicParsing="false" onAction="#process" text="Process Paychecks" />
                            </children></AnchorPane>
                   </content>

@@ -279,16 +279,14 @@ public class Controller {
     }
 
 
-    public void exportDatabase(ActionEvent actionEvent) throws IOException {
+    public void exportFile(ActionEvent actionEvent) throws IOException {
         File file = databaseFile.showSaveDialog(null);
         try {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            PrintWriter writer;
-            writer = new PrintWriter(file);
-            writer.println(com.toString());
-            writer.close();
+            com.exportDatabase(file);
+            display.setText("Database exported to selected file successfully.");
         } catch (IOException ex) {
 
         }

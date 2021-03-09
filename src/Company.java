@@ -1,3 +1,9 @@
+import javafx.event.ActionEvent;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  * Container class that defines the Company array to hold the employee information.
  * Provides default constructor for creating instances
@@ -236,5 +242,16 @@ public class Company {
         if(numEmployee == 0)
             output = "Employee database is empty.\n";
         return output;
+    }
+
+    public void exportDatabase(File file) throws IOException {
+        try {
+            PrintWriter writer;
+            writer = new PrintWriter(file);
+            writer.println(this.toString());
+            writer.close();
+        } catch (IOException ex) {
+
+        }
     }
 }
