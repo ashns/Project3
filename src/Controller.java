@@ -3,16 +3,12 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.Window;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import java.util.StringTokenizer;
-import java.util.logging.Logger;
+
 
 public class Controller {
     @FXML
@@ -76,8 +72,6 @@ public class Controller {
     @FXML
     Label positionLabel = new Label();
 
-
-    final int NUM_TOKENS_PROFILE = 3;
     final int MAX_HOURS = 100;
 
     Company com = new Company();
@@ -117,9 +111,8 @@ public class Controller {
         Float rate = null;
         try {
             rate = Float.parseFloat(payBox.getText());
-            //payBox.setText("Is Float: " + rate);
         } catch (NumberFormatException e) {
-            display.setText("Please enter a valid ");
+            display.setText("Please enter a valid rate.");
             if (Position.getSelectedToggle() == PTRB)
                 display.setText(display.getText() + "Hourly Wage.\n");
             else
@@ -127,7 +120,6 @@ public class Controller {
         }
         Profile hireProfile = getEnteredProfile();
         if (hireProfile != null) {
-
             if (PTRB.isSelected()) {
                 Parttime newHire = new Parttime(hireProfile, rate);
                 if (com.add(newHire))
@@ -166,10 +158,9 @@ public class Controller {
     public void remove(ActionEvent actionEvent) {
         Float rate = null;
         try {
-            rate = Float.parseFloat(payBox.getText());
-            //payBox.setText("Is Float: " + rate);
+            rate = Float.parseFloat(payBox.getText());;
         } catch (NumberFormatException e) {
-            display.setText("Please enter a valid ");
+            display.setText("Please enter a valid rate.");
             if (Position.getSelectedToggle() == PTRB)
                 display.setText(display.getText() + "Hourly Wage.\n");
             else
@@ -208,12 +199,11 @@ public class Controller {
 
     public void setHours(ActionEvent actionEvent) {
         Integer hours = null;
+
         try {
             hours = Integer.parseInt(hourBox.getText());
-
-            //payBox.setText("Is Float: " + hours);
         } catch (NumberFormatException e) {
-            display.setText("Please enter a valid working hours.");
+            display.setText("Please enter a valid number of hours.");
         }
         if (hours == null)
             display.setText("Please enter working hours.");
@@ -234,71 +224,51 @@ public class Controller {
     public void importFile(ActionEvent actionEvent) throws FileNotFoundException {
         File file = databaseFile.showOpenDialog(null);
         Scanner fileReader = new Scanner(file);
+
         while (fileReader.hasNext()) {
             Scanner scLine = new Scanner(file);
             String currentLine = fileReader.nextLine();
             String[] arrayOfInput = currentLine.split(",", 6);
             String firstToken = arrayOfInput[0];
-            System.out.println(firstToken);
+
             if (firstToken.equals("P")) {
                 Profile hireProfile = readProfile(arrayOfInput);
-                //read rate
                 float rate = Float.parseFloat(arrayOfInput[4]);
                 scLine.close();
-
                 Parttime newHire = new Parttime(hireProfile, rate);
-
-                if (com.add(newHire)) {
-                    System.out.println("Employee added.");
-                } else {
-                    System.out.println("Employee is already in the list.");
-                }
+                com.add(newHire);
                 continue;
             }
             if (firstToken.equals("F")) {
                 Profile hireProfile = readProfile(arrayOfInput);
-                //read salary
                 float salary = Float.parseFloat(arrayOfInput[4]);
-
                 scLine.close();
-
                 Fulltime newHire = new Fulltime(hireProfile, salary);
-
-                if (com.add(newHire)) {
-                    System.out.println("Employee added.");
-                } else {
-                    System.out.println("Employee is already in the list.");
-                }
+                com.add(newHire);
                 continue;
             }
-
             if (firstToken.equals("M")) {
-                System.out.println("inside manager");
                 Profile hireProfile = readProfile(arrayOfInput);
                 float salary = Float.parseFloat(arrayOfInput[4]);
                 int code = Integer.parseInt(arrayOfInput[5]);
-
                 scLine.close();
-
                 Management newHire = new Management(hireProfile, salary, code);
-
-                if (com.add(newHire)) {
-                    System.out.println("Employee added.");
-                } else {
-                    System.out.println("Employee is already in the list.");
-                }
+                com.add(newHire);
                 continue;
             }
-
             scLine.close();
         }
         fileReader.close();
+        display.setText("Employees from file have been added.");
     }
 
 
-    public void exportDatabase(ActionEvent actionEvent) {
+    public void exportDatabase(ActionEvent actionEvent) throws IOException {
         File file = databaseFile.showSaveDialog(null);
         try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
             PrintWriter writer;
             writer = new PrintWriter(file);
             writer.println(com.toString());
@@ -361,8 +331,7 @@ public class Controller {
         int iName = 1;
         int iDept = 2;
         int iDate = 3;
-        String[] nameArray = array[iName].split(" ", 2);
-        String name = array[iLastName] + "," + array[iFirstName];
+        String name = array[iName];
         Date hireDate = new Date(array[iDate]);
         return new Profile(name, array[iDept], hireDate);
     }
