@@ -56,18 +56,18 @@
                               <TextField fx:id="payBox" layoutX="299.0" layoutY="54.0" />
                               <Label fx:id="payLabel" alignment="CENTER_RIGHT" layoutX="213.0" layoutY="58.0" text="Hourly Rate: $" />
                               <Label fx:id="rateLabel" layoutX="448.0" layoutY="58.0" text="/ hour" />
-                              <Label layoutX="239.0" layoutY="90.0" text="Hours worked: " />
+                              <Label fx:id="hourLabel" layoutX="239.0" layoutY="90.0" text="Hours worked: " />
                               <TextField fx:id="hourBox" layoutX="325.0" layoutY="86.0" prefHeight="25.0" prefWidth="58.0" />
                               <HBox alignment="CENTER" layoutY="144.0" prefHeight="35.0" prefWidth="600.0" spacing="15.0">
                                  <children>
-                                    <Label text="Management Position:" />
-                                    <RadioButton fx:id="managerRB" mnemonicParsing="false" onAction="#disableFields" text="Manager">
+                                    <Label fx:id="positionLabel" disable="true" text="Management Position:" />
+                                    <RadioButton fx:id="managerRB" disable="true" mnemonicParsing="false" onAction="#disableFields" text="Manager">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="Management" />
                                        </toggleGroup>
                                     </RadioButton>
-                                    <RadioButton fx:id="DepartmentRB" mnemonicParsing="false" onAction="#disableFields" text="Department Head" toggleGroup="$Management" />
-                                    <RadioButton fx:id="DirectorRB" mnemonicParsing="false" onAction="#disableFields" text="Director" toggleGroup="$Management" />
+                                    <RadioButton fx:id="DepartmentRB" disable="true" mnemonicParsing="false" onAction="#disableFields" text="Department Head" toggleGroup="$Management" />
+                                    <RadioButton fx:id="DirectorRB" disable="true" mnemonicParsing="false" onAction="#disableFields" text="Director" toggleGroup="$Management" />
                                  </children>
                               </HBox>
                               <Line endX="499.0" layoutX="101.0" layoutY="247.0" startX="-100.0" />

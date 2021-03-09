@@ -71,6 +71,10 @@ public class Controller {
     RadioButton DepartmentRB = new RadioButton();
     @FXML
     RadioButton DirectorRB = new RadioButton();
+    @FXML
+    Label hourLabel = new Label();
+    @FXML
+    Label positionLabel = new Label();
 
     StringTokenizer parse;
 
@@ -268,6 +272,8 @@ public class Controller {
             DepartmentRB.setDisable(true);
             DirectorRB.setDisable(true);
             hourBox.setDisable(false);
+            hourLabel.setDisable(false);
+            positionLabel.setDisable(true);
             payLabel.setText("Hourly Rate: $");
             rateLabel.setText("/ hour");
         }
@@ -276,6 +282,8 @@ public class Controller {
             DepartmentRB.setDisable(true);
             DirectorRB.setDisable(true);
             hourBox.setDisable(true);
+            hourLabel.setDisable(true);
+            positionLabel.setDisable(true);
             payLabel.setText("Annual Salary: $");
             rateLabel.setText("/ year");
         }
@@ -284,6 +292,8 @@ public class Controller {
             DepartmentRB.setDisable(false);
             DirectorRB.setDisable(false);
             hourBox.setDisable(true);
+            hourLabel.setDisable(true);
+            positionLabel.setDisable(false);
             payLabel.setText("Annual Salary: $");
             rateLabel.setText("/ year");
         }
