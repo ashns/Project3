@@ -259,6 +259,7 @@ public class Controller {
         payBox.clear();
         hourBox.clear();
         dateBox.getEditor().clear();
+        dateBox.setValue(null);
         display.setText("Prompts cleared.");
     }
 
