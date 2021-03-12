@@ -360,6 +360,12 @@ public class Controller {
      * @param actionEvent which is the export button being triggered
      */
     public void exportFile(ActionEvent actionEvent) throws IOException {
+        if(com.getNumEmployees()==0){
+            display.setText("The employee database is empty.");
+            return;
+        }
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        databaseFile.getExtensionFilters().add(extFilter);
         File file = databaseFile.showSaveDialog(null);
         if(file != null) {
             try {
