@@ -144,10 +144,14 @@ public class Controller {
             display.setText(display.getText() + "Please enter a date.\n");
 
         Profile empProfile = null;
-        if(hireDate != null && hireDate.isValid())
-            empProfile = new Profile(name, department, hireDate);
-        else if(!hireDate.isValid())
-            display.setText("Please select a valid date.\n");
+        if(hireDate != null){
+            if(hireDate.isValid()) {
+                empProfile = new Profile(name, department, hireDate);
+            }
+            else
+                    display.setText("Please select a valid date.\n");
+        }
+
         return empProfile;
     }
 
